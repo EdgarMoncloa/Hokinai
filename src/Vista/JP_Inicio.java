@@ -29,24 +29,15 @@ public class JP_Inicio extends javax.swing.JPanel {
     private JP_Preguntas JPO_Preguntas;
     private Coneccion con;
     public JP_Inicio(Coneccion con) throws IOException {
-       this.con=con;
-        //background=new ImageIcon("Fon_Inicio.png").getImage();        
-        //image=(BufferedImage) background;
-        //BufferedImage compatible=createCompatible(loaded.getWidth(), loaded.getHeight(), Transparency.TRANSLUCENT);
-       // URL url = new URL("C/Users/e_raz/Documents/NetBeansProjects/ParstuJavaV/Interfaz/inicio1080/Fon_Inicio.jpg");
-       
+       this.con=con;       
        BI_IniciarTest = ImageIO.read(new File("src/Interfaz/inicio1080/Bot_IniciarTest.png"));  
        BI_IniciarTest_Seleccion=ImageIO.read(new File("src/Interfaz/inicio1080/Bot_IniciarTest_Seleccion.png"));
        BI_Estadisticas=ImageIO.read(new File("src/Interfaz/inicio1080/Bot_Estadisticas.png"));
-       BI_Estadisticas_Seleccion=ImageIO.read(new File("src/Interfaz/inicio1080/Bot_Estadisticas_Seleccion.png"));
-       
-       //BI_Carrera=ImageIO.read(new File("Interfaz/inicio1080/Lis_Carrera.png"));      
+       BI_Estadisticas_Seleccion=ImageIO.read(new File("src/Interfaz/inicio1080/Bot_Estadisticas_Seleccion.png"));         
         initComponents();   
-        JPO_Preguntas=new JP_Preguntas(con);
-        //JP_Preguntas1=JPO_Preguntas.getPanel();
+        JPO_Preguntas=new JP_Preguntas(con);        
         this.setBounds(0, 0, 1080, 720);           
-        this.setVisible(true);
-        //this.add(JP_Preguntas1);
+        this.setVisible(true);        
     }
     public JPanel getPanel(){
         return this;

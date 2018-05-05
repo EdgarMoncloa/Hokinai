@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import Logica.BDD_Coneccion;
+import Logica.Pregunta;
 /**
  *
  * @author EdgarMoncloa
@@ -26,8 +27,10 @@ public class Coneccion extends JFrame{
     private Ventana Ventana;
     private ArrayList AL_Preguntas;
     private BDD_Coneccion BDD;
+    private Pregunta[] Preguntas;
     
     public Coneccion() throws IOException{
+        
         BDD=new BDD_Coneccion();
         BDD.BDD_Coneccion();
         BDD.mostrarAlumnos();
@@ -35,7 +38,7 @@ public class Coneccion extends JFrame{
         Ventana=new Ventana(this);
         JP_Principal=Ventana.getPanelPrincipal();
         JP_Principal.add(new JP_Inicio(this));            
-        Ventana.setVisible(true);        
+        Ventana.setVisible(true);            
     }
     public void cambiarInicio() throws IOException{
         JP_Principal.removeAll(); 
@@ -51,5 +54,12 @@ public class Coneccion extends JFrame{
         JP_Principal.removeAll(); 
         JP_Principal.add(new JP_Estadisticas(this));        
         JP_Principal.repaint();          
+    }
+    public void inicializarPreguntas(){
+        ArrayList Respuestas[] = null;
+        Respuestas[0]=respuestas("Pregunta1","cero","uno","dos");
+    }
+    public ArrayList respuestas(String Pregunta,String R1,String R2,String R3,String R4,String R5){
+        return null;
     }
 }
