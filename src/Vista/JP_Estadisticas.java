@@ -36,7 +36,7 @@ public class JP_Estadisticas extends javax.swing.JPanel {
     public JP_Estadisticas(Coneccion con) {
         this.con=con;
         this.JP_Inicio=JP_Inicio;
-        probabilidad=Math.random();
+        probabilidad=con.getProbExito();
         initComponents();
         DPD_Datos=new DefaultPieDataset();
         DPD_Datos.insertValue(0, "probabilidad", probabilidad);
@@ -105,10 +105,10 @@ public class JP_Estadisticas extends javax.swing.JPanel {
         JL_Probabilidad.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         JL_Probabilidad.setText("Exito");
         JP_Probabilidad.add(JL_Probabilidad);
-        JL_Probabilidad.setBounds(100, 130, 100, 50);
+        JL_Probabilidad.setBounds(100, 130, 150, 50);
 
         add(JP_Probabilidad);
-        JP_Probabilidad.setBounds(400, 180, 300, 300);
+        JP_Probabilidad.setBounds(70, 70, 300, 300);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/Estadisticas1080/Fon_Estadisticas.png"))); // NOI18N
         add(jLabel1);

@@ -40,7 +40,7 @@ public class BDD_Coneccion {
   public void mostrarAlumnos(){
         ResultSet result = null;
         try {
-            PreparedStatement st = connect.prepareStatement("select * from preguntas");
+            PreparedStatement st = connect.prepareStatement("select * from BD_Tab_Evidencias");
             result = st.executeQuery();
             while (result.next()) {
                 System.out.print("ID: ");

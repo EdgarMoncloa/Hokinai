@@ -23,28 +23,24 @@ import javax.swing.JPanel;
  * @author EdgarMoncloa
  */
 public class JP_Inicio extends javax.swing.JPanel {
-    
-   
-    private  BufferedImage BI_IniciarTest,BI_IniciarTest_Seleccion,BI_Estadisticas,BI_Estadisticas_Seleccion;
-    private JP_Preguntas JPO_Preguntas;
-    private Coneccion con;
-    public JP_Inicio(Coneccion con) throws IOException {
+
+    private final BufferedImage BI_IniciarTest,BI_IniciarTest_Seleccion,BI_Estadisticas,BI_Estadisticas_Seleccion;
+    //private final JP_Preguntas JPO_Preguntas;
+    private final Coneccion con;
+    public JP_Inicio(Coneccion con,boolean bol_Estadisticas) throws IOException {
        this.con=con;       
        BI_IniciarTest = ImageIO.read(new File("src/Interfaz/inicio1080/Bot_IniciarTest.png"));  
        BI_IniciarTest_Seleccion=ImageIO.read(new File("src/Interfaz/inicio1080/Bot_IniciarTest_Seleccion.png"));
        BI_Estadisticas=ImageIO.read(new File("src/Interfaz/inicio1080/Bot_Estadisticas.png"));
        BI_Estadisticas_Seleccion=ImageIO.read(new File("src/Interfaz/inicio1080/Bot_Estadisticas_Seleccion.png"));         
-        initComponents();   
-        JPO_Preguntas=new JP_Preguntas(con);        
-        this.setBounds(0, 0, 1080, 720);           
-        this.setVisible(true);        
+       initComponents();          
+       JB_Estadisticas.setVisible(bol_Estadisticas);
+       this.setBounds(0, 0, 1080, 720);           
+       this.setVisible(true);        
     }
     public JPanel getPanel(){
         return this;
     }
-  
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
