@@ -17,6 +17,12 @@ import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.ui.RectangleInsets;
 import Bus.Coneccion;
+import org.jfree.chart.plot.SpiderWebPlot;
+import org.jfree.chart.title.LegendTitle;
+import org.jfree.chart.title.TextTitle;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.ui.RectangleEdge;
 /**
  *
  * @author EdgarMoncloa
@@ -26,25 +32,29 @@ public class JP_Estadisticas extends javax.swing.JPanel {
     /**
      * Creates new form JP_Estadisticas
      */
+    private CategoryDataset CD_Categorias;
+    private JFreeChart Gra_Categorias ;
+    
     private JFreeChart JFC_Grafica;
     private DefaultPieDataset DPD_Datos;
     private PiePlot PiP_Plot;
     private ChartPanel CP_Grafica;
     Coneccion con;
     double probabilidad;
-    public JPanel JP_Inicio;
+    private JPanel JP_Inicio;
     public JP_Estadisticas(Coneccion con) {
         this.con=con;
         this.JP_Inicio=JP_Inicio;
         probabilidad=con.getProbExito();
         initComponents();
+        //agrega valores a la tabla con la probabilidad de exito
         DPD_Datos=new DefaultPieDataset();
         DPD_Datos.insertValue(0, "probabilidad", probabilidad);
         DPD_Datos.insertValue(0, "fracaso", (1-probabilidad));
         JFC_Grafica=ChartFactory.createRingChart("Probabilidad de Exito", DPD_Datos, false, false, false);
         CP_Grafica=new ChartPanel(JFC_Grafica);
         CP_Grafica.setVisible(true);
-        CP_Grafica.setBounds(-2, -2, 300, 300);
+        CP_Grafica.setBounds(-2, -2, 302, 302);
         JFC_Grafica.setBorderVisible(false);
         PiP_Plot=(PiePlot)JFC_Grafica.getPlot();
         PiP_Plot.setSectionPaint("probabilidad", Color.BLACK);
@@ -52,21 +62,65 @@ public class JP_Estadisticas extends javax.swing.JPanel {
         PiP_Plot.setBackgroundPaint(Color.WHITE);
         PiP_Plot.setBackgroundAlpha(0);
         PiP_Plot.setLabelGenerator(null);
-        PiP_Plot.setInsets(new RectangleInsets(0,0,0, 0));
+        PiP_Plot.setInsets(new RectangleInsets(0,0,0, 0));        
+        
+        //Agrega grafica y texto al panel
         JP_Probabilidad.add(CP_Grafica);
         JP_Probabilidad.setEnabled(false);
         JL_Probabilidad.setText(String.valueOf((int)(probabilidad*100))+"%");
         
+        
+        //Grafica de categorias
+        CD_Categorias = createDataset();
+        Gra_Categorias = createChart(CD_Categorias); 
+        ChartPanel CP_Categorias = new ChartPanel(Gra_Categorias);
+        CP_Categorias.setBounds(-2, -2, 552, 402);   
+        Gra_Categorias.setBackgroundPaint(Color.white);     
+        JP_Spider.add(CP_Categorias);
+        
+       // JP_Spider.setVisible(true);
+      
+       
         this.setBounds(0, 0, 1080, 720);           
         this.setVisible(true);
         
     }
+      private static JFreeChart createChart(CategoryDataset categorydataset)   
+    {   
+        SpiderWebPlot spiderwebplot = new SpiderWebPlot(categorydataset);   
+        spiderwebplot.setInsets(new RectangleInsets(0,0,0,0));
+        JFreeChart jfreechart = new JFreeChart("Spider Chart Demo", TextTitle.DEFAULT_FONT, spiderwebplot, false);  
+        LegendTitle legendtitle = new LegendTitle(spiderwebplot);   
+        legendtitle.setPosition(RectangleEdge.BOTTOM);   
+        jfreechart.addSubtitle(legendtitle);  
+        return jfreechart;   
+    }  
+     private static CategoryDataset createDataset()   
+    {   
+        String s = "Maximo";   
+        String s1 = "Personal";
+        String s3 = "Category 1";   
+        String s4 = "Category 2";   
+        String s5 = "Category 3";   
+        String s6 = "Category 4";   
+        String s7 = "Category 5";   
+        DefaultCategoryDataset defaultcategorydataset = new DefaultCategoryDataset();   
+        defaultcategorydataset.addValue(5, s, s3);   
+        defaultcategorydataset.addValue(5, s, s4);   
+        defaultcategorydataset.addValue(5, s, s5);   
+        defaultcategorydataset.addValue(5, s, s6);   
+        defaultcategorydataset.addValue(5, s, s7);   
+        defaultcategorydataset.addValue(5, s1, s3);   
+        defaultcategorydataset.addValue(4, s1, s4);   
+        defaultcategorydataset.addValue(3, s1, s5);   
+        defaultcategorydataset.addValue(4, s1, s6);   
+        defaultcategorydataset.addValue(4, s1, s7); 
+        return defaultcategorydataset;   
+    } 
     public JPanel getPanel(){
         return this;
     }
-    public void calcularRandom(){
-        probabilidad=Math.random();
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,14 +131,20 @@ public class JP_Estadisticas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        JP_Spider = new javax.swing.JPanel();
         JP_Probabilidad = new java.awt.Panel();
         JL_Probabilidad = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+        jLabel2.setText("jLabel2");
+
         setBackground(new java.awt.Color(157, 11, 11));
         setMinimumSize(new java.awt.Dimension(1080, 720));
-        setLayout(null);
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/Estadisticas1080/Bot_Menu.png"))); // NOI18N
         jButton1.setBorderPainted(false);
@@ -94,10 +154,19 @@ public class JP_Estadisticas extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1);
-        jButton1.setBounds(440, 640, 210, 80);
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 640, 210, 80));
 
-        JP_Probabilidad.setBackground(new java.awt.Color(255, 255, 255));
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("159");
+        jScrollPane1.setViewportView(jTextArea1);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, 330, 180));
+
+        JP_Spider.setBackground(new java.awt.Color(217, 83, 83));
+        add(JP_Spider, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 550, 400));
+
+        JP_Probabilidad.setBackground(new java.awt.Color(204, 255, 255));
         JP_Probabilidad.setMinimumSize(new java.awt.Dimension(300, 300));
         JP_Probabilidad.setPreferredSize(new java.awt.Dimension(300, 300));
         JP_Probabilidad.setLayout(null);
@@ -107,12 +176,10 @@ public class JP_Estadisticas extends javax.swing.JPanel {
         JP_Probabilidad.add(JL_Probabilidad);
         JL_Probabilidad.setBounds(100, 130, 150, 50);
 
-        add(JP_Probabilidad);
-        JP_Probabilidad.setBounds(70, 70, 300, 300);
+        add(JP_Probabilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/Estadisticas1080/Fon_Estadisticas.png"))); // NOI18N
-        add(jLabel1);
-        jLabel1.setBounds(0, 0, 1080, 720);
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -127,7 +194,11 @@ public class JP_Estadisticas extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JL_Probabilidad;
     private java.awt.Panel JP_Probabilidad;
+    private javax.swing.JPanel JP_Spider;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
