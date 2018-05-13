@@ -80,7 +80,6 @@ public class JP_Estadisticas extends javax.swing.JPanel {
         
        // JP_Spider.setVisible(true);
       
-       
         this.setBounds(0, 0, 1080, 720);           
         this.setVisible(true);
         
@@ -133,8 +132,6 @@ public class JP_Estadisticas extends javax.swing.JPanel {
 
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         JP_Spider = new javax.swing.JPanel();
         JP_Probabilidad = new java.awt.Panel();
         JL_Probabilidad = new javax.swing.JLabel();
@@ -144,7 +141,7 @@ public class JP_Estadisticas extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(157, 11, 11));
         setMinimumSize(new java.awt.Dimension(1080, 720));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(null);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/Estadisticas1080/Bot_Menu.png"))); // NOI18N
         jButton1.setBorderPainted(false);
@@ -154,17 +151,12 @@ public class JP_Estadisticas extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 640, 210, 80));
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("159");
-        jScrollPane1.setViewportView(jTextArea1);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, 330, 180));
+        add(jButton1);
+        jButton1.setBounds(440, 640, 210, 80);
 
         JP_Spider.setBackground(new java.awt.Color(217, 83, 83));
-        add(JP_Spider, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 550, 400));
+        add(JP_Spider);
+        JP_Spider.setBounds(460, 70, 550, 400);
 
         JP_Probabilidad.setBackground(new java.awt.Color(204, 255, 255));
         JP_Probabilidad.setMinimumSize(new java.awt.Dimension(300, 300));
@@ -176,10 +168,12 @@ public class JP_Estadisticas extends javax.swing.JPanel {
         JP_Probabilidad.add(JL_Probabilidad);
         JL_Probabilidad.setBounds(100, 130, 150, 50);
 
-        add(JP_Probabilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
+        add(JP_Probabilidad);
+        JP_Probabilidad.setBounds(70, 70, 300, 300);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/Estadisticas1080/Fon_Estadisticas.png"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 1080, 720);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -198,7 +192,5 @@ public class JP_Estadisticas extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

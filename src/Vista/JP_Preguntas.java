@@ -30,8 +30,8 @@ public class JP_Preguntas extends javax.swing.JPanel {
      * Creates new form JP_Preguntas
      */
     // private boolean[] Bol_Seleccion;
-    private BufferedImage[] BI_Respuestas, BI_Respuestas_Seleccion;
-    private BufferedImage BI_Siguiente, BI_Anterior, BI_Siguiente_Terminar, BI_Anterior_Inicio;
+    private ImageIcon[] BI_Respuestas, BI_Respuestas_Seleccion;
+    private ImageIcon BI_Siguiente, BI_Anterior, BI_Siguiente_Terminar, BI_Anterior_Inicio;
     //private String[] STR_Preguntas;
     private String[] STR_Respuestas;
     private int INT_Apuntador;
@@ -48,20 +48,20 @@ public class JP_Preguntas extends javax.swing.JPanel {
         AL_Preguntas = con.getPreguntas();
         AL_Respuestas = new ArrayList();
         //Bol_Seleccion = new boolean[5];
-        BI_Respuestas = new BufferedImage[5];
-        BI_Respuestas_Seleccion = new BufferedImage[5];
+        BI_Respuestas = new ImageIcon[5];
+        BI_Respuestas_Seleccion = new ImageIcon[5];
         INT_Apuntador = 0;
         for (int j = 0; j < 5; j++) {
             //Bol_Seleccion[j] = false;
-            String urlRespuestas = "src/Interfaz/Preguntas1080/Bot_Respuesta" + (j + 1) + ".png";
-            String urlRespuestas_Seleccion = "src/Interfaz/Preguntas1080/Bot_Respuesta" + (j + 1) + "_Seleccion.png";
-            BI_Respuestas[j] = ImageIO.read(new File(urlRespuestas));
-            BI_Respuestas_Seleccion[j] = ImageIO.read(new File(urlRespuestas_Seleccion));
+            String urlRespuestas = "/Interfaz/Preguntas1080/Bot_Respuesta" + (j + 1) + ".png";
+            String urlRespuestas_Seleccion = "/Interfaz/Preguntas1080/Bot_Respuesta" + (j + 1) + "_Seleccion.png";
+            BI_Respuestas[j] = new ImageIcon(getClass().getResource(urlRespuestas));
+            BI_Respuestas_Seleccion[j] = new ImageIcon(getClass().getResource(urlRespuestas_Seleccion));
         }
-        BI_Siguiente = ImageIO.read(new File("src/Interfaz/Preguntas1080/Bot_Siguiente.png"));
-        BI_Siguiente_Terminar = ImageIO.read(new File("src/Interfaz/Preguntas1080/Bot_Siguiente_Terminar.png"));
-        BI_Anterior = ImageIO.read(new File("src/Interfaz/Preguntas1080/Bot_Anterior.png"));
-        BI_Anterior_Inicio = ImageIO.read(new File("src/Interfaz/Preguntas1080/Bot_Anterior_Inicio.png"));
+        BI_Siguiente = new ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Bot_Siguiente.png"));
+        BI_Siguiente_Terminar = new ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Bot_Siguiente_Terminar.png"));
+        BI_Anterior = new ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Bot_Anterior.png"));
+        BI_Anterior_Inicio = new ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Bot_Anterior_Inicio.png"));
         initComponents();
         JB_Siguiente.setEnabled(false);
         escribirPreguntas();
@@ -204,11 +204,11 @@ public class JP_Preguntas extends javax.swing.JPanel {
         //si se selecciono un boton se puede seguir adelante
 
         //reinicia los estados de los botones        
-        JB_Respuesta1.setIcon(new ImageIcon(BI_Respuestas[0]));
-        JB_Respuesta2.setIcon(new ImageIcon(BI_Respuestas[1]));
-        JB_Respuesta3.setIcon(new ImageIcon(BI_Respuestas[2]));
-        JB_Respuesta4.setIcon(new ImageIcon(BI_Respuestas[3]));
-        JB_Respuesta5.setIcon(new ImageIcon(BI_Respuestas[4]));
+        JB_Respuesta1.setIcon(BI_Respuestas[0]);
+        JB_Respuesta2.setIcon(BI_Respuestas[1]);
+        JB_Respuesta3.setIcon(BI_Respuestas[2]);
+        JB_Respuesta4.setIcon(BI_Respuestas[3]);
+        JB_Respuesta5.setIcon(BI_Respuestas[4]);
         //verifica si se selecciono algun boton
         if (entrada < 5) {            
             if (AL_Respuestas.size() <= INT_Apuntador) {
@@ -219,19 +219,19 @@ public class JP_Preguntas extends javax.swing.JPanel {
             }
             switch (entrada) {
                 case 0:
-                    JB_Respuesta1.setIcon(new ImageIcon(BI_Respuestas_Seleccion[0]));
+                    JB_Respuesta1.setIcon(BI_Respuestas_Seleccion[0]);
                     break;
                 case 1:
-                    JB_Respuesta2.setIcon(new ImageIcon(BI_Respuestas_Seleccion[1]));
+                    JB_Respuesta2.setIcon(BI_Respuestas_Seleccion[1]);
                     break;
                 case 2:
-                    JB_Respuesta3.setIcon(new ImageIcon(BI_Respuestas_Seleccion[2]));
+                    JB_Respuesta3.setIcon(BI_Respuestas_Seleccion[2]);
                     break;
                 case 3:
-                    JB_Respuesta4.setIcon(new ImageIcon(BI_Respuestas_Seleccion[3]));
+                    JB_Respuesta4.setIcon(BI_Respuestas_Seleccion[3]);
                     break;
                 case 4:
-                    JB_Respuesta5.setIcon(new ImageIcon(BI_Respuestas_Seleccion[4]));
+                    JB_Respuesta5.setIcon(BI_Respuestas_Seleccion[4]);
                     break;
                 default:
                     break;
@@ -241,19 +241,19 @@ public class JP_Preguntas extends javax.swing.JPanel {
             if (INT_Apuntador < AL_Respuestas.size()) {
                 switch ((int) AL_Respuestas.get(INT_Apuntador)) {
                     case 0:
-                        JB_Respuesta1.setIcon(new ImageIcon(BI_Respuestas_Seleccion[0]));
+                        JB_Respuesta1.setIcon(BI_Respuestas_Seleccion[0]);
                         break;
                     case 1:
-                        JB_Respuesta2.setIcon(new ImageIcon(BI_Respuestas_Seleccion[1]));
+                        JB_Respuesta2.setIcon(BI_Respuestas_Seleccion[1]);
                         break;
                     case 2:
-                        JB_Respuesta3.setIcon(new ImageIcon(BI_Respuestas_Seleccion[2]));
+                        JB_Respuesta3.setIcon(BI_Respuestas_Seleccion[2]);
                         break;
                     case 3:
-                        JB_Respuesta4.setIcon(new ImageIcon(BI_Respuestas_Seleccion[3]));
+                        JB_Respuesta4.setIcon(BI_Respuestas_Seleccion[3]);
                         break;
                     case 4:
-                        JB_Respuesta5.setIcon(new ImageIcon(BI_Respuestas_Seleccion[4]));
+                        JB_Respuesta5.setIcon(BI_Respuestas_Seleccion[4]);
                         break;
                     default:
                         break;
@@ -452,13 +452,13 @@ public class JP_Preguntas extends javax.swing.JPanel {
                 INT_Apuntador += 1;
                 redibujar(10);
                 escribirPreguntas();
-                JB_Siguiente.setIcon(new ImageIcon(BI_Siguiente));
-                JB_Anterior.setIcon(new ImageIcon(BI_Anterior));
+                JB_Siguiente.setIcon(BI_Siguiente);
+                JB_Anterior.setIcon(BI_Anterior);
 
             }
             //si es el ultimo numero cambia el boton a terminar
             if (INT_Apuntador == AL_Preguntas.size() - 1) {
-                JB_Siguiente.setIcon(new ImageIcon(BI_Siguiente_Terminar));
+                JB_Siguiente.setIcon(BI_Siguiente_Terminar);
             }
             //si no se ha contestado la pregunta no se permite dar siguiente         
             if (INT_Apuntador == AL_Respuestas.size()) {
@@ -482,11 +482,11 @@ public class JP_Preguntas extends javax.swing.JPanel {
             }
         }
         if (INT_Apuntador == 1) {
-            JB_Anterior.setIcon(new ImageIcon(BI_Anterior_Inicio));
+            JB_Anterior.setIcon(BI_Anterior_Inicio);
             INT_Apuntador -= 1;
         }
         if (INT_Apuntador > 1) {
-            JB_Anterior.setIcon(new ImageIcon(BI_Anterior));
+            JB_Anterior.setIcon(BI_Anterior);
             INT_Apuntador -= 1;
         }
         redibujar(10);

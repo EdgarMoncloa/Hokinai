@@ -39,7 +39,7 @@ public class Coneccion extends JFrame{
         AL_RespuestasUsuario=new ArrayList();
         BDD=new BDD_Coneccion();
         BDD.BDD_Coneccion();
-        BDD.mostrarAlumnos();        
+        //BDD.mostrarAlumnos();        
         Ventana=new Ventana(this);
         JP_Principal=Ventana.getPanelPrincipal();
         JP_Principal.add(new JP_Inicio(this,bol_Estadisticas));            
