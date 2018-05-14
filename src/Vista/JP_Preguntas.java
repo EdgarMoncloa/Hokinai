@@ -5,18 +5,21 @@
  */
 package Vista;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import Bus.Coneccion;
 import Logica.Pregunta;
+import com.sun.prism.paint.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 //import java.awt.geom.AffineTransform;
 
@@ -30,59 +33,119 @@ public class JP_Preguntas extends javax.swing.JPanel {
      * Creates new form JP_Preguntas
      */
     // private boolean[] Bol_Seleccion;
-    private ImageIcon[] BI_Respuestas, BI_Respuestas_Seleccion;
-    private ImageIcon BI_Siguiente, BI_Anterior, BI_Siguiente_Terminar, BI_Anterior_Inicio;
+    private ImageIcon[] AII_Respuestas, AII_Respuestas_Seleccion;
+    private ImageIcon II_Siguiente, BI_AnterioI, II_Siguiente_Terminar, II_Anterior_Inicio,II_Vidrio;
     //private String[] STR_Preguntas;
     private String[] STR_Respuestas;
     private int INT_Apuntador;
     private Coneccion con;
     private ArrayList AL_Preguntas;
     private ArrayList AL_Respuestas;
+    private JLabel[] JL_Respuestas;
+    private JButton[] JB_Respuestas;
+    private JLabel JL_Vidrio;
     public JPanel JP_Inicio;
 
     public JP_Preguntas(Coneccion con) throws IOException {
         this.con = con;
         this.JP_Inicio = JP_Inicio;
         STR_Respuestas = new String[5];
+        JL_Respuestas = new JLabel[5];
         //Se Obtienen las preguntas
         AL_Preguntas = con.getPreguntas();
         AL_Respuestas = new ArrayList();
         //Bol_Seleccion = new boolean[5];
-        BI_Respuestas = new ImageIcon[5];
-        BI_Respuestas_Seleccion = new ImageIcon[5];
+        AII_Respuestas = new ImageIcon[5];
+        AII_Respuestas_Seleccion = new ImageIcon[5];
         INT_Apuntador = 0;
         for (int j = 0; j < 5; j++) {
-            //Bol_Seleccion[j] = false;
             String urlRespuestas = "/Interfaz/Preguntas1080/Bot_Respuesta" + (j + 1) + ".png";
             String urlRespuestas_Seleccion = "/Interfaz/Preguntas1080/Bot_Respuesta" + (j + 1) + "_Seleccion.png";
-            BI_Respuestas[j] = new ImageIcon(getClass().getResource(urlRespuestas));
-            BI_Respuestas_Seleccion[j] = new ImageIcon(getClass().getResource(urlRespuestas_Seleccion));
+            AII_Respuestas[j] = new ImageIcon(getClass().getResource(urlRespuestas));
+            AII_Respuestas_Seleccion[j] = new ImageIcon(getClass().getResource(urlRespuestas_Seleccion));
         }
-        BI_Siguiente = new ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Bot_Siguiente.png"));
-        BI_Siguiente_Terminar = new ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Bot_Siguiente_Terminar.png"));
-        BI_Anterior = new ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Bot_Anterior.png"));
-        BI_Anterior_Inicio = new ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Bot_Anterior_Inicio.png"));
-        initComponents();
+        II_Siguiente = new ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Bot_Siguiente.png"));
+        II_Siguiente_Terminar = new ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Bot_Siguiente_Terminar.png"));
+        BI_AnterioI = new ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Bot_Anterior.png"));
+        II_Anterior_Inicio = new ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Bot_Anterior_Inicio.png"));
+        //el vidrio se declara al inicio para hacer el efecto de transparencia en todas las imagenes
+        JL_Vidrio=new JLabel();
+        JL_Vidrio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Fon_Vidrio.png"))); // NOI18N
+        add(JL_Vidrio);
+        JL_Vidrio.setBounds(0, 0, 1080, 720);
+        declararRespuestas();         
+        initComponents();    
         JB_Siguiente.setEnabled(false);
         escribirPreguntas();
+
         this.setBounds(0, 0, 1080, 720);
         this.setVisible(true);
     }
 
+    private void declararRespuestas() {
+        for (int j = 0; j < 5; j++) {
+            if (j == 0 || j == 4) {
+                JL_Respuestas[j] = new JLabel() {
+                    protected void paintComponent(Graphics grafico) {
+                        Graphics2D graficoNuevo = (Graphics2D) grafico;
+                        graficoNuevo.setRenderingHint(
+                                RenderingHints.KEY_ANTIALIASING,
+                                RenderingHints.VALUE_ANTIALIAS_ON
+                        );
+                        AffineTransform at = graficoNuevo.getTransform();
+                        Shape figura = graficoNuevo.getClip();
+                        double X = getWidth() / 2.0;
+                        double Y = getHeight() / 2.0;
+                        at.rotate(Math.toRadians(-9), X, Y);
+                        graficoNuevo.setTransform(at);
+                        graficoNuevo.setClip(figura);
+                        super.paintComponent(grafico);
+                    }
+                };
+                JL_Respuestas[j].setVisible(true);
+                JL_Respuestas[j].setBounds(0, 0, 200, 200);
+                this.add(JL_Respuestas[j]);
+            } else {
+                JL_Respuestas[j] = new JLabel() {
+                    protected void paintComponent(Graphics grafico) {
+                        Graphics2D graficoNuevo = (Graphics2D) grafico;
+                        graficoNuevo.setRenderingHint(
+                                RenderingHints.KEY_ANTIALIASING,
+                                RenderingHints.VALUE_ANTIALIAS_ON
+                        );
+                        AffineTransform at = graficoNuevo.getTransform();
+                        Shape figura = graficoNuevo.getClip();
+                        double X = getWidth() / 2.0;
+                        double Y = getHeight() / 2.0;
+                        at.rotate(Math.toRadians(3), X, Y);
+                        graficoNuevo.setTransform(at);
+                        graficoNuevo.setClip(figura);
+                        super.paintComponent(grafico);
+                    }
+                };
+                JL_Respuestas[j].setVisible(true);
+                JL_Respuestas[j].setBounds(0, 0, 200, 200);
+                this.add(JL_Respuestas[j]);
+            }
+
+        }
+
+    }
+
     public void escribirPreguntas() {
-        int width = 200, height = 200;
-        /*STR_Respuestas=new String[(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getNRespuestas())];
-        JL_Respuestas=new JLabel[(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getNRespuestas())];       
-        for(int j=0;j<(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getNRespuestas());j++){            
-        }*/
+        int width = 200, height = 200,widthLabel=130;
+        
+        for (int j = 0; j < 5; j++) {
+            if (j < ((Pregunta) AL_Preguntas.get(INT_Apuntador)).getNRespuestas()) {
+                JL_Respuestas[j].setVisible(true);
+                JL_Respuestas[j].setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(j));
+            } else {
+                JL_Respuestas[j].setVisible(false);
+            }
+        }
+
         switch (((Pregunta) AL_Preguntas.get(INT_Apuntador)).getNRespuestas()) {
             case 2:
-                //Actibar labels
-                JL_Respuesta1.setVisible(true);
-                JL_Respuesta2.setVisible(true);
-                JL_Respuesta3.setVisible(false);
-                JL_Respuesta4.setVisible(false);
-                JL_Respuesta5.setVisible(false);
                 //activar botones
                 JB_Respuesta1.setVisible(true);
                 JB_Respuesta2.setVisible(true);
@@ -93,20 +156,10 @@ public class JP_Preguntas extends javax.swing.JPanel {
                 JB_Respuesta1.setBounds(300, 400, width, height);
                 JB_Respuesta2.setBounds(600, 400, width, height);
                 //posicionar Labels
-                JL_Respuesta1.setBounds(350, 370, width, height);
-                JL_Respuesta2.setBounds(650, 370, width, height);
-                //Escribir texto
-                //Escribir texto
-                JL_Respuesta1.setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(0));
-                JL_Respuesta2.setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(1));
+                JL_Respuestas[0].setBounds(350, 370, widthLabel, height);
+                JL_Respuestas[1].setBounds(650, 370, widthLabel, height);
                 break;
             case 3:
-                //Actibar labels
-                JL_Respuesta1.setVisible(true);
-                JL_Respuesta2.setVisible(true);
-                JL_Respuesta3.setVisible(true);
-                JL_Respuesta4.setVisible(false);
-                JL_Respuesta5.setVisible(false);
                 //activar botones
                 JB_Respuesta1.setVisible(true);
                 JB_Respuesta2.setVisible(true);
@@ -118,21 +171,11 @@ public class JP_Preguntas extends javax.swing.JPanel {
                 JB_Respuesta2.setBounds(450, 500, width, height);
                 JB_Respuesta3.setBounds(700, 350, width, height);
                 //posicionar Labels
-                JL_Respuesta1.setBounds(250, 320, width, height);
-                JL_Respuesta2.setBounds(500, 470, width, height);
-                JL_Respuesta3.setBounds(750, 320, width, height);
-                //Escribir texto
-                JL_Respuesta1.setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(0));
-                JL_Respuesta2.setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(1));
-                JL_Respuesta3.setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(2));
+                JL_Respuestas[0].setBounds(250, 320, widthLabel, height);
+                JL_Respuestas[1].setBounds(500, 470, widthLabel, height);
+                JL_Respuestas[2].setBounds(735, 330, widthLabel, height);                
                 break;
-            case 4:
-                //Actibar labels
-                JL_Respuesta1.setVisible(true);
-                JL_Respuesta2.setVisible(true);
-                JL_Respuesta3.setVisible(true);
-                JL_Respuesta4.setVisible(true);
-                JL_Respuesta5.setVisible(false);
+            case 4:               
                 //activar botones
                 JB_Respuesta1.setVisible(true);
                 JB_Respuesta2.setVisible(true);
@@ -145,23 +188,12 @@ public class JP_Preguntas extends javax.swing.JPanel {
                 JB_Respuesta3.setBounds(350, 510, width, height);
                 JB_Respuesta4.setBounds(600, 510, width, height);
                 //posicionar Labels
-                JL_Respuesta1.setBounds(270, 280, width, height);
-                JL_Respuesta2.setBounds(710, 290, width, height);
-                JL_Respuesta3.setBounds(400, 480, width, height);
-                JL_Respuesta4.setBounds(650, 480, width, height);
-                //Escribir texto
-                JL_Respuesta1.setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(0));
-                JL_Respuesta2.setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(1));
-                JL_Respuesta3.setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(2));
-                JL_Respuesta4.setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(3));
+                JL_Respuestas[0].setBounds(270, 280, widthLabel, height);
+                JL_Respuestas[1].setBounds(710, 290, widthLabel, height);
+                JL_Respuestas[2].setBounds(385, 490, widthLabel, height);
+                JL_Respuestas[3].setBounds(650, 480, widthLabel, height);               
                 break;
             case 5:
-                //Actibar labels
-                JL_Respuesta1.setVisible(true);
-                JL_Respuesta2.setVisible(true);
-                JL_Respuesta3.setVisible(true);
-                JL_Respuesta4.setVisible(true);
-                JL_Respuesta5.setVisible(true);
                 //activar botones
                 JB_Respuesta1.setVisible(true);
                 JB_Respuesta2.setVisible(true);
@@ -171,22 +203,16 @@ public class JP_Preguntas extends javax.swing.JPanel {
                 //posicionar botones                  
                 JB_Respuesta1.setBounds(120, 310, width, height);
                 JB_Respuesta2.setBounds(410, 320, width, height);
-                JB_Respuesta3.setBounds(750, 310, width, height);
+                JB_Respuesta3.setBounds(735, 320, width, height);
                 JB_Respuesta4.setBounds(270, 510, width, height);
                 JB_Respuesta5.setBounds(600, 510, width, height);
                 //posicionar Labels
-                JL_Respuesta1.setBounds(170, 280, width, height);
-                JL_Respuesta2.setBounds(460, 290, width, height);
-                JL_Respuesta3.setBounds(800, 280, width, height);
-                JL_Respuesta4.setBounds(320, 480, width, height);
-                JL_Respuesta5.setBounds(650, 480, width, height);
-                //Escribir texto
-                JL_Respuesta1.setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(0));
-                JL_Respuesta2.setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(1));
-                JL_Respuesta3.setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(2));
-                JL_Respuesta4.setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(3));
-                JL_Respuesta5.setText(((Pregunta) AL_Preguntas.get(INT_Apuntador)).getRespuesta(4));
-                break;
+                JL_Respuestas[0].setBounds(170, 280, widthLabel, height);
+                JL_Respuestas[1].setBounds(460, 290, widthLabel, height);
+                JL_Respuestas[2].setBounds(800, 280, widthLabel, height);
+                JL_Respuestas[3].setBounds(320, 480, widthLabel, height);
+                JL_Respuestas[4].setBounds(650, 470, widthLabel, height);
+               break;
             default:
                 break;
         }
@@ -204,34 +230,34 @@ public class JP_Preguntas extends javax.swing.JPanel {
         //si se selecciono un boton se puede seguir adelante
 
         //reinicia los estados de los botones        
-        JB_Respuesta1.setIcon(BI_Respuestas[0]);
-        JB_Respuesta2.setIcon(BI_Respuestas[1]);
-        JB_Respuesta3.setIcon(BI_Respuestas[2]);
-        JB_Respuesta4.setIcon(BI_Respuestas[3]);
-        JB_Respuesta5.setIcon(BI_Respuestas[4]);
+        JB_Respuesta1.setIcon(AII_Respuestas[0]);
+        JB_Respuesta2.setIcon(AII_Respuestas[1]);
+        JB_Respuesta3.setIcon(AII_Respuestas[2]);
+        JB_Respuesta4.setIcon(AII_Respuestas[3]);
+        JB_Respuesta5.setIcon(AII_Respuestas[4]);
         //verifica si se selecciono algun boton
-        if (entrada < 5) {            
+        if (entrada < 5) {
             if (AL_Respuestas.size() <= INT_Apuntador) {
                 AL_Respuestas.add(entrada);
-               
+
             } else {
                 AL_Respuestas.set(INT_Apuntador, entrada);
             }
             switch (entrada) {
                 case 0:
-                    JB_Respuesta1.setIcon(BI_Respuestas_Seleccion[0]);
+                    JB_Respuesta1.setIcon(AII_Respuestas_Seleccion[0]);
                     break;
                 case 1:
-                    JB_Respuesta2.setIcon(BI_Respuestas_Seleccion[1]);
+                    JB_Respuesta2.setIcon(AII_Respuestas_Seleccion[1]);
                     break;
                 case 2:
-                    JB_Respuesta3.setIcon(BI_Respuestas_Seleccion[2]);
+                    JB_Respuesta3.setIcon(AII_Respuestas_Seleccion[2]);
                     break;
                 case 3:
-                    JB_Respuesta4.setIcon(BI_Respuestas_Seleccion[3]);
+                    JB_Respuesta4.setIcon(AII_Respuestas_Seleccion[3]);
                     break;
                 case 4:
-                    JB_Respuesta5.setIcon(BI_Respuestas_Seleccion[4]);
+                    JB_Respuesta5.setIcon(AII_Respuestas_Seleccion[4]);
                     break;
                 default:
                     break;
@@ -241,19 +267,19 @@ public class JP_Preguntas extends javax.swing.JPanel {
             if (INT_Apuntador < AL_Respuestas.size()) {
                 switch ((int) AL_Respuestas.get(INT_Apuntador)) {
                     case 0:
-                        JB_Respuesta1.setIcon(BI_Respuestas_Seleccion[0]);
+                        JB_Respuesta1.setIcon(AII_Respuestas_Seleccion[0]);
                         break;
                     case 1:
-                        JB_Respuesta2.setIcon(BI_Respuestas_Seleccion[1]);
+                        JB_Respuesta2.setIcon(AII_Respuestas_Seleccion[1]);
                         break;
                     case 2:
-                        JB_Respuesta3.setIcon(BI_Respuestas_Seleccion[2]);
+                        JB_Respuesta3.setIcon(AII_Respuestas_Seleccion[2]);
                         break;
                     case 3:
-                        JB_Respuesta4.setIcon(BI_Respuestas_Seleccion[3]);
+                        JB_Respuesta4.setIcon(AII_Respuestas_Seleccion[3]);
                         break;
                     case 4:
-                        JB_Respuesta5.setIcon(BI_Respuestas_Seleccion[4]);
+                        JB_Respuesta5.setIcon(AII_Respuestas_Seleccion[4]);
                         break;
                     default:
                         break;
@@ -264,7 +290,7 @@ public class JP_Preguntas extends javax.swing.JPanel {
         //if (INT_Apuntador <= AL_Respuestas.size() - 1) {
         JB_Siguiente.setEnabled(true);
         //}
-       
+
     }
 
     /**
@@ -280,11 +306,6 @@ public class JP_Preguntas extends javax.swing.JPanel {
         JB_Siguiente = new javax.swing.JButton();
         JL_SoporteExtra = new javax.swing.JLabel();
         JL_Marco = new javax.swing.JLabel();
-        JL_Respuesta1 = new javax.swing.JLabel();
-        JL_Respuesta2 = new javax.swing.JLabel();
-        JL_Respuesta3 = new javax.swing.JLabel();
-        JL_Respuesta4 = new javax.swing.JLabel();
-        JL_Respuesta5 = new javax.swing.JLabel();
         JB_Respuesta1 = new javax.swing.JButton();
         JB_Respuesta2 = new javax.swing.JButton();
         JB_Respuesta3 = new javax.swing.JButton();
@@ -293,7 +314,6 @@ public class JP_Preguntas extends javax.swing.JPanel {
         JL_Pregunta = new javax.swing.JLabel();
         JL_FondoPregunta = new javax.swing.JLabel();
         JL_Fondo = new javax.swing.JLabel();
-        JL_Vidrio = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(1080, 720));
         setLayout(null);
@@ -327,27 +347,6 @@ public class JP_Preguntas extends javax.swing.JPanel {
         JL_Marco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Fon_Marco.png"))); // NOI18N
         add(JL_Marco);
         JL_Marco.setBounds(0, 0, 1080, 720);
-
-        JL_Respuesta1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        JL_Respuesta1.setText("Texto de prueba");
-        add(JL_Respuesta1);
-        JL_Respuesta1.setBounds(160, 380, 140, 80);
-
-        JL_Respuesta2.setText("Texto de prueba");
-        add(JL_Respuesta2);
-        JL_Respuesta2.setBounds(460, 380, 160, 80);
-
-        JL_Respuesta3.setText("Texto de prueba");
-        add(JL_Respuesta3);
-        JL_Respuesta3.setBounds(750, 370, 140, 80);
-
-        JL_Respuesta4.setText("Texto de prueba");
-        add(JL_Respuesta4);
-        JL_Respuesta4.setBounds(320, 550, 80, 14);
-
-        JL_Respuesta5.setText("Texto de prueba");
-        add(JL_Respuesta5);
-        JL_Respuesta5.setBounds(660, 590, 80, 14);
 
         JB_Respuesta1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Bot_Respuesta1.png"))); // NOI18N
         JB_Respuesta1.setBorderPainted(false);
@@ -416,10 +415,6 @@ public class JP_Preguntas extends javax.swing.JPanel {
         JL_Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Fon_Base.png"))); // NOI18N
         add(JL_Fondo);
         JL_Fondo.setBounds(0, 0, 1080, 720);
-
-        JL_Vidrio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/Preguntas1080/Fon_Vidrio.png"))); // NOI18N
-        add(JL_Vidrio);
-        JL_Vidrio.setBounds(0, 0, 1080, 720);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Accion_respuesta1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Accion_respuesta1
@@ -452,13 +447,13 @@ public class JP_Preguntas extends javax.swing.JPanel {
                 INT_Apuntador += 1;
                 redibujar(10);
                 escribirPreguntas();
-                JB_Siguiente.setIcon(BI_Siguiente);
-                JB_Anterior.setIcon(BI_Anterior);
+                JB_Siguiente.setIcon(II_Siguiente);
+                JB_Anterior.setIcon(BI_AnterioI);
 
             }
             //si es el ultimo numero cambia el boton a terminar
             if (INT_Apuntador == AL_Preguntas.size() - 1) {
-                JB_Siguiente.setIcon(BI_Siguiente_Terminar);
+                JB_Siguiente.setIcon(II_Siguiente_Terminar);
             }
             //si no se ha contestado la pregunta no se permite dar siguiente         
             if (INT_Apuntador == AL_Respuestas.size()) {
@@ -466,14 +461,11 @@ public class JP_Preguntas extends javax.swing.JPanel {
             }
         }
 
-        
-
 
     }//GEN-LAST:event_Accion_Siguiente
 
     private void Accion_Anterior(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Accion_Anterior
 
-        
         if (INT_Apuntador == 0) {
             try {
                 con.cambiarInicio();
@@ -482,11 +474,11 @@ public class JP_Preguntas extends javax.swing.JPanel {
             }
         }
         if (INT_Apuntador == 1) {
-            JB_Anterior.setIcon(BI_Anterior_Inicio);
+            JB_Anterior.setIcon(II_Anterior_Inicio);
             INT_Apuntador -= 1;
         }
         if (INT_Apuntador > 1) {
-            JB_Anterior.setIcon(BI_Anterior);
+            JB_Anterior.setIcon(BI_AnterioI);
             INT_Apuntador -= 1;
         }
         redibujar(10);
@@ -507,12 +499,6 @@ public class JP_Preguntas extends javax.swing.JPanel {
     private javax.swing.JLabel JL_FondoPregunta;
     private javax.swing.JLabel JL_Marco;
     private javax.swing.JLabel JL_Pregunta;
-    private javax.swing.JLabel JL_Respuesta1;
-    private javax.swing.JLabel JL_Respuesta2;
-    private javax.swing.JLabel JL_Respuesta3;
-    private javax.swing.JLabel JL_Respuesta4;
-    private javax.swing.JLabel JL_Respuesta5;
     private javax.swing.JLabel JL_SoporteExtra;
-    private javax.swing.JLabel JL_Vidrio;
     // End of variables declaration//GEN-END:variables
 }

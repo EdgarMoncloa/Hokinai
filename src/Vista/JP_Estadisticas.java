@@ -74,8 +74,9 @@ public class JP_Estadisticas extends javax.swing.JPanel {
         CD_Categorias = createDataset();
         Gra_Categorias = createChart(CD_Categorias); 
         ChartPanel CP_Categorias = new ChartPanel(Gra_Categorias);
-        CP_Categorias.setBounds(-2, -2, 552, 402);   
-        Gra_Categorias.setBackgroundPaint(Color.white);     
+        CP_Categorias.setBounds(-1, 4, 555, 420);   
+        Gra_Categorias.setBackgroundPaint(Color.white); 
+        JP_Spider.setBackground(Color.WHITE);
         JP_Spider.add(CP_Categorias);
         
        // JP_Spider.setVisible(true);
@@ -88,7 +89,7 @@ public class JP_Estadisticas extends javax.swing.JPanel {
     {   
         SpiderWebPlot spiderwebplot = new SpiderWebPlot(categorydataset);   
         spiderwebplot.setInsets(new RectangleInsets(0,0,0,0));
-        JFreeChart jfreechart = new JFreeChart("Spider Chart Demo", TextTitle.DEFAULT_FONT, spiderwebplot, false);  
+        JFreeChart jfreechart = new JFreeChart("Categorias", TextTitle.DEFAULT_FONT, spiderwebplot, false);  
         LegendTitle legendtitle = new LegendTitle(spiderwebplot);   
         legendtitle.setPosition(RectangleEdge.BOTTOM);   
         jfreechart.addSubtitle(legendtitle);  
@@ -96,30 +97,32 @@ public class JP_Estadisticas extends javax.swing.JPanel {
     }  
      private static CategoryDataset createDataset()   
     {   
-        String s = "Maximo";   
-        String s1 = "Personal";
-        String s3 = "Category 1";   
-        String s4 = "Category 2";   
-        String s5 = "Category 3";   
-        String s6 = "Category 4";   
-        String s7 = "Category 5";   
+        String PromedioEgresados = "Promedio Egresados";   
+        String Personal = "Personal";
+        String Categoria1 = "Responsabilidad";   
+        String Categoria2 = "Tiempo Dedicado";   
+        String Categoria3 = "Imagen Personal";
+        String Categoria4 = "Autodidacta";   
+        String Categoria5 = "Interes en la carrera";              
         DefaultCategoryDataset defaultcategorydataset = new DefaultCategoryDataset();   
-        defaultcategorydataset.addValue(5, s, s3);   
-        defaultcategorydataset.addValue(5, s, s4);   
-        defaultcategorydataset.addValue(5, s, s5);   
-        defaultcategorydataset.addValue(5, s, s6);   
-        defaultcategorydataset.addValue(5, s, s7);   
-        defaultcategorydataset.addValue(5, s1, s3);   
-        defaultcategorydataset.addValue(4, s1, s4);   
-        defaultcategorydataset.addValue(3, s1, s5);   
-        defaultcategorydataset.addValue(4, s1, s6);   
-        defaultcategorydataset.addValue(4, s1, s7); 
+        defaultcategorydataset.addValue(5, PromedioEgresados, Categoria1);   
+        defaultcategorydataset.addValue(5, PromedioEgresados, Categoria2);   
+        defaultcategorydataset.addValue(5, PromedioEgresados, Categoria3);   
+        defaultcategorydataset.addValue(5, PromedioEgresados, Categoria4);   
+        defaultcategorydataset.addValue(5, PromedioEgresados, Categoria5);   
+        defaultcategorydataset.addValue(5, Personal, Categoria1);   
+        defaultcategorydataset.addValue(4, Personal, Categoria2);   
+        defaultcategorydataset.addValue(3, Personal, Categoria3);   
+        defaultcategorydataset.addValue(4, Personal, Categoria4);   
+        defaultcategorydataset.addValue(4, Personal, Categoria5); 
         return defaultcategorydataset;   
     } 
     public JPanel getPanel(){
         return this;
     }
-    
+    private String formatoHtml(String texto) {
+        return "<HTML><BODY><H3>" + texto + "</H3></BODY></HTML>";
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,11 +134,17 @@ public class JP_Estadisticas extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        JB_Menu = new javax.swing.JButton();
         JP_Spider = new javax.swing.JPanel();
         JP_Probabilidad = new java.awt.Panel();
         JL_Probabilidad = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        JL_Categorias = new javax.swing.JLabel();
+        JB_Responsabilidad = new javax.swing.JButton();
+        JB_TiempoDedicado = new javax.swing.JButton();
+        JB_ImagenPersonal = new javax.swing.JButton();
+        JB_Autodidacta = new javax.swing.JButton();
+        JB_ConocimientoCarrera = new javax.swing.JButton();
+        JL_Fondo = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
@@ -143,20 +152,20 @@ public class JP_Estadisticas extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1080, 720));
         setLayout(null);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/Estadisticas1080/Bot_Menu.png"))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        JB_Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/Estadisticas1080/Bot_Menu.png"))); // NOI18N
+        JB_Menu.setBorderPainted(false);
+        JB_Menu.setContentAreaFilled(false);
+        JB_Menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                JB_MenuActionPerformed(evt);
             }
         });
-        add(jButton1);
-        jButton1.setBounds(440, 640, 210, 80);
+        add(JB_Menu);
+        JB_Menu.setBounds(440, 640, 210, 80);
 
         JP_Spider.setBackground(new java.awt.Color(217, 83, 83));
         add(JP_Spider);
-        JP_Spider.setBounds(460, 70, 550, 400);
+        JP_Spider.setBounds(460, 70, 555, 420);
 
         JP_Probabilidad.setBackground(new java.awt.Color(204, 255, 255));
         JP_Probabilidad.setMinimumSize(new java.awt.Dimension(300, 300));
@@ -169,28 +178,101 @@ public class JP_Estadisticas extends javax.swing.JPanel {
         JL_Probabilidad.setBounds(100, 130, 150, 50);
 
         add(JP_Probabilidad);
-        JP_Probabilidad.setBounds(70, 70, 300, 300);
+        JP_Probabilidad.setBounds(120, 150, 300, 300);
+        add(JL_Categorias);
+        JL_Categorias.setBounds(160, 490, 230, 110);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/Estadisticas1080/Fon_Estadisticas.png"))); // NOI18N
-        add(jLabel1);
-        jLabel1.setBounds(0, 0, 1080, 720);
+        JB_Responsabilidad.setText("Responsabilidad");
+        JB_Responsabilidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_ResponsabilidadActionPerformed(evt);
+            }
+        });
+        add(JB_Responsabilidad);
+        JB_Responsabilidad.setBounds(490, 520, 150, 50);
+
+        JB_TiempoDedicado.setText("Tiempo Dedicado");
+        JB_TiempoDedicado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_TiempoDedicadoActionPerformed(evt);
+            }
+        });
+        add(JB_TiempoDedicado);
+        JB_TiempoDedicado.setBounds(580, 590, 150, 50);
+
+        JB_ImagenPersonal.setText("Imagen Personal");
+        JB_ImagenPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_ImagenPersonalActionPerformed(evt);
+            }
+        });
+        add(JB_ImagenPersonal);
+        JB_ImagenPersonal.setBounds(670, 520, 150, 50);
+
+        JB_Autodidacta.setText("Autodidacta");
+        JB_Autodidacta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_AutodidactaActionPerformed(evt);
+            }
+        });
+        add(JB_Autodidacta);
+        JB_Autodidacta.setBounds(760, 590, 150, 50);
+
+        JB_ConocimientoCarrera.setText("Conocimiento/Interes de la carrera");
+        JB_ConocimientoCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_ConocimientoCarreraActionPerformed(evt);
+            }
+        });
+        add(JB_ConocimientoCarrera);
+        JB_ConocimientoCarrera.setBounds(840, 520, 150, 50);
+
+        JL_Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/Estadisticas1080/Fon_Estadisticas.png"))); // NOI18N
+        add(JL_Fondo);
+        JL_Fondo.setBounds(0, 0, 1080, 720);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void JB_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_MenuActionPerformed
         try {
             con.cambiarInicio();
         } catch (IOException ex) {
             Logger.getLogger(JP_Estadisticas.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_JB_MenuActionPerformed
+
+    private void JB_TiempoDedicadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_TiempoDedicadoActionPerformed
+        JL_Categorias.setText(formatoHtml("Tiempo dedicado al estudio <br> Definicion ")); 
+    }//GEN-LAST:event_JB_TiempoDedicadoActionPerformed
+
+    private void JB_ImagenPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_ImagenPersonalActionPerformed
+        JL_Categorias.setText(formatoHtml("Imagen Personal <br> Definicion "));
+    }//GEN-LAST:event_JB_ImagenPersonalActionPerformed
+
+    private void JB_ConocimientoCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_ConocimientoCarreraActionPerformed
+       JL_Categorias.setText(formatoHtml("Conocimiento e interes sobre la carrera <br> Definicion "));
+    }//GEN-LAST:event_JB_ConocimientoCarreraActionPerformed
+
+    private void JB_AutodidactaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_AutodidactaActionPerformed
+       JL_Categorias.setText(formatoHtml("Autodidacta <br> Definicion "));       
+    }//GEN-LAST:event_JB_AutodidactaActionPerformed
+
+    private void JB_ResponsabilidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_ResponsabilidadActionPerformed
+       JL_Categorias.setText(formatoHtml("Responsabilidad <br> Definicion ")); 
+    }//GEN-LAST:event_JB_ResponsabilidadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JB_Autodidacta;
+    private javax.swing.JButton JB_ConocimientoCarrera;
+    private javax.swing.JButton JB_ImagenPersonal;
+    private javax.swing.JButton JB_Menu;
+    private javax.swing.JButton JB_Responsabilidad;
+    private javax.swing.JButton JB_TiempoDedicado;
+    private javax.swing.JLabel JL_Categorias;
+    private javax.swing.JLabel JL_Fondo;
     private javax.swing.JLabel JL_Probabilidad;
     private java.awt.Panel JP_Probabilidad;
     private javax.swing.JPanel JP_Spider;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

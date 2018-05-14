@@ -6,17 +6,10 @@
 package Vista;
 
 import Bus.Coneccion;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -25,7 +18,7 @@ import javax.swing.JPanel;
  */
 public class JP_Inicio extends javax.swing.JPanel {
 
-    private final ImageIcon BI_IniciarTest,BI_IniciarTest_Seleccion,BI_Estadisticas,BI_Estadisticas_Seleccion;
+    private final ImageIcon II_IniciarTest,II_IniciarTest_Seleccion,II_Estadisticas,II_Estadisticas_Seleccion;
     //private final JP_Preguntas JPO_Preguntas;
     private final Coneccion con;
     public JP_Inicio(Coneccion con,boolean bol_Estadisticas) throws IOException {
@@ -33,10 +26,10 @@ public class JP_Inicio extends javax.swing.JPanel {
        
        //URL Url=this.getClass().getResource("/Interfaz/inicio1080/Bot_IniciarTest.png");
        //BI_IniciarTest = ImageIO.read(new File("src/Interfaz/inicio1080/Bot_IniciarTest.png"));  
-       BI_IniciarTest = new ImageIcon(getClass().getResource("/Interfaz/inicio1080/Bot_IniciarTest.png"));  
-       BI_IniciarTest_Seleccion=new ImageIcon(getClass().getResource("/Interfaz/inicio1080/Bot_IniciarTest_Seleccion.png"));
-       BI_Estadisticas=new ImageIcon(getClass().getResource("/Interfaz/inicio1080/Bot_Estadisticas.png"));
-       BI_Estadisticas_Seleccion=new ImageIcon(getClass().getResource("/Interfaz/inicio1080/Bot_Estadisticas_Seleccion.png"));         
+       II_IniciarTest = new ImageIcon(getClass().getResource("/Interfaz/inicio1080/Bot_IniciarTest.png"));  
+       II_IniciarTest_Seleccion=new ImageIcon(getClass().getResource("/Interfaz/inicio1080/Bot_IniciarTest_Seleccion.png"));
+       II_Estadisticas=new ImageIcon(getClass().getResource("/Interfaz/inicio1080/Bot_Estadisticas.png"));
+       II_Estadisticas_Seleccion=new ImageIcon(getClass().getResource("/Interfaz/inicio1080/Bot_Estadisticas_Seleccion.png"));         
        initComponents();          
        JB_Estadisticas.setVisible(bol_Estadisticas);
        this.setBounds(0, 0, 1080, 720);           
@@ -119,11 +112,11 @@ public class JP_Inicio extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JB_IniciarTestJBE_PasarMouse(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JB_IniciarTestJBE_PasarMouse
-        JB_IniciarTest.setIcon((BI_IniciarTest_Seleccion));
+        JB_IniciarTest.setIcon((II_IniciarTest_Seleccion));
     }//GEN-LAST:event_JB_IniciarTestJBE_PasarMouse
 
     private void JB_IniciarTestJBE_SalirMouse(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JB_IniciarTestJBE_SalirMouse
-        JB_IniciarTest.setIcon((BI_IniciarTest));
+        JB_IniciarTest.setIcon((II_IniciarTest));
     }//GEN-LAST:event_JB_IniciarTestJBE_SalirMouse
 
     private void JB_IniciarTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_IniciarTestActionPerformed
@@ -135,11 +128,11 @@ public class JP_Inicio extends javax.swing.JPanel {
     }//GEN-LAST:event_JB_IniciarTestActionPerformed
 
     private void JB_EstadisticasEstadisticasEntra(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JB_EstadisticasEstadisticasEntra
-        JB_Estadisticas.setIcon((BI_Estadisticas_Seleccion));
+        JB_Estadisticas.setIcon((II_Estadisticas_Seleccion));
     }//GEN-LAST:event_JB_EstadisticasEstadisticasEntra
 
     private void JB_EstadisticasEstadisticasMouseSale(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JB_EstadisticasEstadisticasMouseSale
-        JB_Estadisticas.setIcon((BI_Estadisticas));
+        JB_Estadisticas.setIcon((II_Estadisticas));
     }//GEN-LAST:event_JB_EstadisticasEstadisticasMouseSale
 
     private void JB_EstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_EstadisticasActionPerformed
