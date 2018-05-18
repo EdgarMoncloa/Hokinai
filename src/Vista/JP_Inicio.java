@@ -77,7 +77,7 @@ public class JP_Inicio extends javax.swing.JPanel {
 
         Cho_Carrera.setBackground(new java.awt.Color(255, 242, 216));
         Cho_Carrera.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Cho_Carrera.setFocusable(false);
+        Cho_Carrera.setEnabled(false);
         add(Cho_Carrera);
         Cho_Carrera.setBounds(830, 160, 110, 20);
         Cho_Carrera.addItem("Ing en Sistemas");
