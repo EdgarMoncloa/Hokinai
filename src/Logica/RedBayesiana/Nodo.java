@@ -12,11 +12,25 @@ import java.util.ArrayList;
  * @author EdgarMoncloa
  */
 public class Nodo {
-    private ArrayList AL_Padres,AL_Hijos;
-    private int INT_NumRespuestas;
-    public Nodo(ArrayList AL_Padres, ArrayList AL_Hijos, int INT_NumRespuestas) {
-        this.AL_Padres = AL_Padres;
-        this.AL_Hijos = AL_Hijos;
-        this.INT_NumRespuestas = INT_NumRespuestas;
-    }   
+   ArrayList Probabilidad;
+    int Respuesta;
+    int numRespuestas;
+    //float PR1,PR2,PR3;
+
+    public Nodo(float PR1, float PR2) {
+        Probabilidad=new ArrayList();
+        Probabilidad.add(PR1);
+        Probabilidad.add(PR2);
+        numRespuestas=Probabilidad.size()-1;
+    }
+    public Nodo(float PR1, float PR2, float PR3) {   
+        Probabilidad=new ArrayList();
+        Probabilidad.add(PR1);
+        Probabilidad.add(PR2);
+        Probabilidad.add(PR3);        
+        numRespuestas=Probabilidad.size()-1;
+    }
+     public void setRespuesta(int Respuesta) {
+        this.Respuesta = Respuesta;
+    }
 }
