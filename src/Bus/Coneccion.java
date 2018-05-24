@@ -35,6 +35,7 @@ public class Coneccion extends JFrame {
     private ArrayList AL_RespuestasUsuario;
     private double Dec_ProbExito;
     private boolean bol_Estadisticas;
+    public double[] dob_Categorias;
 
     public Coneccion() throws IOException {
         AL_Preguntas = new ArrayList();
@@ -85,7 +86,9 @@ public class Coneccion extends JFrame {
     }
 
     public void cambiarEstadisticas() {
-        Dec_ProbExito = (new Red_Bayesiana(AL_RespuestasUsuario, this.getNumPreguntas())).calcularProbabilidad();
+        Red_Bayesiana red=new Red_Bayesiana(AL_RespuestasUsuario,this.getNumPreguntas());
+        Dec_ProbExito = red.calcularProbabilidad();
+        dob_Categorias=red.Categorias;
         JP_Principal.removeAll();
         JP_Principal.add(new JP_Estadisticas(this));
         JP_Principal.repaint();
@@ -164,31 +167,25 @@ public class Coneccion extends JFrame {
                 "No",
                 "Si"                
         ));
-        AL_Preguntas.add(new Pregunta(
-                "11.- ¿Puedes darte cuenta rápido de cuál es el error de un compañero que no puede resolver un problema de matemáticas?",
-                "No",
-                "Si"
-        ));
          AL_Preguntas.add(new Pregunta(
-                "12.- ¿Te gusta conocer programas computacionales para hacer cálculos y operaciones matemáticas?",
+                "11.- ¿Te gusta conocer programas computacionales para hacer cálculos y operaciones matemáticas?",
                 "Me desagrada",
                 "Me es indiferente",
                 "Me gusta"
         ));
           AL_Preguntas.add(new Pregunta(
-                "13.- ¿Te gustaría aprender como un ingeniero aplica las matemáticas en su trabajo?",
+                "12.- ¿Te gustaría aprender como un ingeniero aplica las matemáticas en su trabajo?",
                 "No me interesa",
                 "Me llama algo la atencion",
                 "Me interesa"
         ));
            AL_Preguntas.add(new Pregunta(
-                "14.- ¿Te interesaría observar como el centro de computación de una empresa organiza los datos referentes a nóminas prestaciones a los empleados?",
-                "No me intereza",
-                "Me llama algo la atencion",
+                "13.- ¿Te interesaría observar como el centro de computación de una empresa organiza los datos referentes a nóminas prestaciones a los empleados?",
+                "Me es indiferente",
                 "Me gustaria"
         ));
         AL_Preguntas.add(new Pregunta(
-                "15.- Cuando alguien critica tu trabajo generalmente tu:",
+                "14.- Cuando alguien critica tu trabajo generalmente tu:",
                 "Buscas dar justificaciones o defenderte",
                 "No le das mucha importancia",
                 "Analizas la critica y tratas de mejorar"

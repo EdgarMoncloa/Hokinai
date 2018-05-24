@@ -12,25 +12,34 @@ import java.util.ArrayList;
  * @author EdgarMoncloa
  */
 public class Nodo {
-   ArrayList Probabilidad;
-    int Respuesta;
-    int numRespuestas;
+
+    public ArrayList AL_Probabilidad;
+    public ArrayList AL_Padres,AL_TablaProbabilidades;
+    public int Respuesta;
+    public int numRespuestas;
     //float PR1,PR2,PR3;
 
+    public Nodo(ArrayList AL_Padres) {
+        AL_Probabilidad = new ArrayList();        
+        this.AL_Padres=AL_Padres;        
+        numRespuestas = AL_Probabilidad.size() - 1;
+    }    
     public Nodo(float PR1, float PR2) {
-        Probabilidad=new ArrayList();
-        Probabilidad.add(PR1);
-        Probabilidad.add(PR2);
-        numRespuestas=Probabilidad.size()-1;
+        AL_Probabilidad = new ArrayList();
+        AL_Probabilidad.add(PR1);
+        AL_Probabilidad.add(PR2);
+        AL_Padres=new ArrayList();        
+        numRespuestas = AL_Probabilidad.size() - 1;
     }
-    public Nodo(float PR1, float PR2, float PR3) {   
-        Probabilidad=new ArrayList();
-        Probabilidad.add(PR1);
-        Probabilidad.add(PR2);
-        Probabilidad.add(PR3);        
-        numRespuestas=Probabilidad.size()-1;
-    }
-     public void setRespuesta(int Respuesta) {
+    public Nodo(float PR1, float PR2, float PR3) {
+        AL_Probabilidad = new ArrayList();
+        AL_Probabilidad.add(PR1);
+        AL_Probabilidad.add(PR2);
+        AL_Probabilidad.add(PR3);
+        AL_Padres=new ArrayList();  
+        numRespuestas = AL_Probabilidad.size() - 1;
+    }  
+    public void setRespuesta(int Respuesta) {
         this.Respuesta = Respuesta;
     }
 }
