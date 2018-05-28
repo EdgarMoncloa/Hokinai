@@ -16,6 +16,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -441,7 +442,11 @@ public class JP_Preguntas extends javax.swing.JPanel {
 
         if (INT_Apuntador == AL_Preguntas.size() - 1) {
             con.setRespuestasUsuario(AL_Respuestas);
-            con.cambiarEstadisticas();
+            try {
+                con.cambiarEstadisticas();
+            } catch (SQLException ex) {
+                Logger.getLogger(JP_Preguntas.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             if (INT_Apuntador < AL_Preguntas.size() - 1) {
                 INT_Apuntador += 1;
@@ -502,3 +507,5 @@ public class JP_Preguntas extends javax.swing.JPanel {
     private javax.swing.JLabel JL_SoporteExtra;
     // End of variables declaration//GEN-END:variables
 }
+
+

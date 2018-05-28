@@ -7,6 +7,7 @@ package Vista;
 
 import Bus.Coneccion;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -136,7 +137,11 @@ public class JP_Inicio extends javax.swing.JPanel {
     }//GEN-LAST:event_JB_EstadisticasEstadisticasMouseSale
 
     private void JB_EstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_EstadisticasActionPerformed
-        con.cambiarEstadisticas();
+        try {
+            con.cambiarEstadisticas();
+        } catch (SQLException ex) {
+            Logger.getLogger(JP_Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_JB_EstadisticasActionPerformed
 
 

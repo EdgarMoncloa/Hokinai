@@ -107,11 +107,11 @@ public class JP_Estadisticas extends javax.swing.JPanel {
         String Categoria4 = "Autodidacta";   
         String Categoria5 = "Interes en la carrera";              
         DefaultCategoryDataset defaultcategorydataset = new DefaultCategoryDataset();   
-        defaultcategorydataset.addValue(8.5, PromedioEgresados, Categoria1);   
-        defaultcategorydataset.addValue(8.5, PromedioEgresados, Categoria2);   
-        defaultcategorydataset.addValue(8.5, PromedioEgresados, Categoria3);   
-        defaultcategorydataset.addValue(8.5, PromedioEgresados, Categoria4);   
-        defaultcategorydataset.addValue(8.5, PromedioEgresados, Categoria5);   
+        defaultcategorydataset.addValue(8, PromedioEgresados, Categoria1);   
+        defaultcategorydataset.addValue(8, PromedioEgresados, Categoria2);   
+        defaultcategorydataset.addValue(8, PromedioEgresados, Categoria3);   
+        defaultcategorydataset.addValue(8, PromedioEgresados, Categoria4);   
+        defaultcategorydataset.addValue(8, PromedioEgresados, Categoria5);   
         defaultcategorydataset.addValue(dob_Categorias[0], Personal, Categoria1);   
         defaultcategorydataset.addValue(dob_Categorias[1], Personal, Categoria2);   
         defaultcategorydataset.addValue(dob_Categorias[2], Personal, Categoria3);   

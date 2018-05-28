@@ -50,29 +50,6 @@ public class Coneccion extends JFrame {
         JP_Principal.add(new JP_Inicio(this, bol_Estadisticas));
         Ventana.setVisible(true);
     }
-
-    public void redBayesiana() throws SQLException{
-        ConeccionBDD con = new ConeccionBDD();
-        ArrayList red = new ArrayList();
-        //con.coneccionBDD();
-        red.add(new Nodo((float) 0.1, (float) 0.9));
-        red.add(new Nodo((float) 0.2, (float) 0.2, (float) 0.6));
-        red.add(new Nodo((float) 0.3, (float) 0.4, (float) 0.3));
-        red.add(new Nodo((float) 0.3, (float) 0.7));
-        red.add(new Nodo((float) 0.6, (float) 0.4));
-        red.add(new Nodo((float) 0.4, (float) 0.6));
-        red.add(new Nodo((float) 0.3, (float) 0.7));
-        red.add(new Nodo((float) 0.4, (float) 0.6));
-
-        for (int j = 0; j < 1000000; j++) {
-            for (int k = 0; k < 8; k++) {
-                new generaDatos((Nodo) red.get(k));
-            }
-            con.ingresarRespuestas(red);
-            System.out.println("j:"+j);
-        }
-        con.close();
-    }
     public void cambiarInicio() throws IOException {
         JP_Principal.removeAll();
         JP_Principal.add(new JP_Inicio(this, bol_Estadisticas));
@@ -85,9 +62,12 @@ public class Coneccion extends JFrame {
         JP_Principal.repaint();
     }
 
-    public void cambiarEstadisticas() {
+    public void cambiarEstadisticas() throws SQLException  {
         Red_Bayesiana red=new Red_Bayesiana(AL_RespuestasUsuario,this.getNumPreguntas());
-        Dec_ProbExito = red.calcularProbabilidad();
+        Dec_ProbExito = red.calcularMuestreoPorPriori();
+        //Esta funcion se utiliza para generar los datos aleatorios
+        //red.GenerarDatos(); 
+        red.calcularCategorias();
         dob_Categorias=red.Categorias;
         JP_Principal.removeAll();
         JP_Principal.add(new JP_Estadisticas(this));
@@ -124,16 +104,16 @@ public class Coneccion extends JFrame {
                 "Si"
         ));
         AL_Preguntas.add(new Pregunta(
-                "3.- ¿Estas informado o te interesan los avances tecnológicos actuales en áreas de la carrera?",
+                "3.- ¿Estas informado sobre los avances tecnológicos actuales en áreas de la carrera?",
                 "No",
                 "Me interesan pero no estoy muy informado",
                 "Si"
         ));
         AL_Preguntas.add(new Pregunta(
                 "4.- ¿Cuantas materias reprobaste el último año de preparatoria?",
-                "Ninguna",
+                "3 o mas",
                 "1-2",
-                "3 o más"
+                "Ninguna"
         ));
          AL_Preguntas.add(new Pregunta(
                 "5.- ¿Has recibido orientación vocacional para elegir una carrera? ",
@@ -153,8 +133,8 @@ public class Coneccion extends JFrame {
         ));
         AL_Preguntas.add(new Pregunta(
                 "8.- En tu día prefieres:",
+                "Ser esspontaneo",
                 "Tener algunas cosas planeadas y ser algo espontáneo",
-                "Ser espontáneo",
                 "Tener la mayoria de cosas planeadas"
         ));
         AL_Preguntas.add(new Pregunta(
@@ -190,29 +170,29 @@ public class Coneccion extends JFrame {
                 "No le das mucha importancia",
                 "Analizas la critica y tratas de mejorar"
         ));
-       /* AL_Preguntas.add(new Pregunta(
-                "16.- ¿Que tan responsable te consideras?",
+       AL_Preguntas.add(new Pregunta(
+                "15.- ¿Que tan responsable te consideras?",
                 "Nada",
                 "Algo",
                 "Mucho"
         ));
          AL_Preguntas.add(new Pregunta(
-                "17.-¿Cuantas horas estudias por tu cuenta a la semana?",
+                "16.-¿Cuantas horas estudias por tu cuenta a la semana?",
                 "0-2",
                 "3-6",
                 "7+"
         ));
          AL_Preguntas.add(new Pregunta(
-                "18.-¿Te consideras alguien autodidacta?",
-                "Si",
-                "No"
+                "17.-¿Te consideras alguien autodidacta?",
+                "No",
+                "Si"
         ));
          AL_Preguntas.add(new Pregunta(
-                "19.-¿Que tanto conoces la carga académica de la carrera?",
+                "18.-¿Que tanto conoces la carga académica de la carrera?",
                 "Poco",
                 "Algo",                
                 "Bastante"
-        ));*/
+        ));
 
     }
 
