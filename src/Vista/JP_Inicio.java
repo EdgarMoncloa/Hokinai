@@ -141,6 +141,8 @@ public class JP_Inicio extends javax.swing.JPanel {
             con.cambiarEstadisticas();
         } catch (SQLException ex) {
             Logger.getLogger(JP_Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(JP_Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_JB_EstadisticasActionPerformed
 

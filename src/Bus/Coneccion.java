@@ -62,7 +62,7 @@ public class Coneccion extends JFrame {
         JP_Principal.repaint();
     }
 
-    public void cambiarEstadisticas() throws SQLException  {
+    public void cambiarEstadisticas() throws SQLException, ClassNotFoundException  {
         Red_Bayesiana red=new Red_Bayesiana(AL_RespuestasUsuario,this.getNumPreguntas());
         Dec_ProbExito = red.calcularMuestreoPorPriori();
         //Esta funcion se utiliza para generar los datos aleatorios

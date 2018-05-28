@@ -297,16 +297,19 @@ public class Red_Bayesiana {
         //Normaliza valor probabilidades
         return (float) ((.60 * (probabilidad / total) / 1) + .15);
     }
-    public double calcularMuestreoPorPriori() throws SQLException{
+    public double calcularMuestreoPorPriori() throws SQLException, ClassNotFoundException{
         ConeccionBDD con=new ConeccionBDD();   
         float Flo_probabilidad=con.calcularProbabilidad(AL_Respuestas);
         con.close();
         if(Flo_probabilidad==0.0){
             Flo_probabilidad=calcularProbabilidad();
         }
+        if(Flo_probabilidad>=.70){
+            Flo_probabilidad=(float) .75;
+        }
         return  Flo_probabilidad;        
     }
-    public void GenerarDatos() throws SQLException {
+    public void GenerarDatos() throws SQLException, ClassNotFoundException {
         ConeccionBDD con = new ConeccionBDD();
         int val=0;
         for (int j = 0; j < 1000000; j++) {

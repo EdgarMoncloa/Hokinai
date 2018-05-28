@@ -166,6 +166,7 @@ public class JP_Estadisticas extends javax.swing.JPanel {
         JB_Menu.setBounds(440, 640, 210, 80);
 
         JP_Spider.setBackground(new java.awt.Color(217, 83, 83));
+        JP_Spider.setLayout(null);
         add(JP_Spider);
         JP_Spider.setBounds(460, 70, 555, 420);
 

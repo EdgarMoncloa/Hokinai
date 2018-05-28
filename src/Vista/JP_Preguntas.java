@@ -446,6 +446,8 @@ public class JP_Preguntas extends javax.swing.JPanel {
                 con.cambiarEstadisticas();
             } catch (SQLException ex) {
                 Logger.getLogger(JP_Preguntas.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(JP_Preguntas.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             if (INT_Apuntador < AL_Preguntas.size() - 1) {
