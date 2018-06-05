@@ -64,6 +64,7 @@ public class Ventana extends javax.swing.JFrame {
         JP_Principal = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Hokinai");
 
         JP_Principal.setMinimumSize(new java.awt.Dimension(1000, 700));
         JP_Principal.setPreferredSize(new java.awt.Dimension(1080, 720));

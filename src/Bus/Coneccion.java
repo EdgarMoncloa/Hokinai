@@ -15,9 +15,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import Logica.BDD_Coneccion;
 import Logica.Pregunta;
-import Logica.RedBayesiana.Red_Bayesiana;
+import Logica.RedBayesiana.Nodo;
+import Logica.RedBayesiana.*;
+import java.sql.SQLException;
 
 /**
  *
@@ -33,6 +34,7 @@ public class Coneccion extends JFrame {
     private ArrayList AL_RespuestasUsuario;
     private double Dec_ProbExito;
     private boolean bol_Estadisticas;
+    public double[] dob_Categorias;
 
     public Coneccion() throws IOException {
         AL_Preguntas = new ArrayList();
@@ -46,8 +48,8 @@ public class Coneccion extends JFrame {
         JP_Principal = Ventana.getPanelPrincipal();
         JP_Principal.add(new JP_Inicio(this, bol_Estadisticas));
         Ventana.setVisible(true);
+        
     }
-
     public void cambiarInicio() throws IOException {
         JP_Principal.removeAll();
         JP_Principal.add(new JP_Inicio(this, bol_Estadisticas));
@@ -60,8 +62,14 @@ public class Coneccion extends JFrame {
         JP_Principal.repaint();
     }
 
-    public void cambiarEstadisticas() {
-        Dec_ProbExito = (new Red_Bayesiana(AL_RespuestasUsuario, this.getNumPreguntas())).calcularProbabilidad();
+    public void cambiarEstadisticas() throws SQLException, ClassNotFoundException  {
+        Red_Bayesiana red=new Red_Bayesiana(AL_RespuestasUsuario,this.getNumPreguntas()); 
+        //Esta funcion se utiliza para generar los datos aleatorios
+        red.GenerarDatos(); 
+        Dec_ProbExito = red.calcularMuestreoPorPriori();
+        System.out.println("2");
+        red.calcularCategorias();        
+        dob_Categorias=red.Categorias;
         JP_Principal.removeAll();
         JP_Principal.add(new JP_Estadisticas(this));
         JP_Principal.repaint();
@@ -93,65 +101,69 @@ public class Coneccion extends JFrame {
         ));
         AL_Preguntas.add(new Pregunta(
                 "2.- ¿Has trabajado alguna vez en una empresa?  ",
-                "Si",
-                "No"
+                "No",
+                "Si"
         ));
         AL_Preguntas.add(new Pregunta(
-                "3.- ¿Estas informado o te interesan los avances tecnológicos actuales en áreas de la carrera?",
-                "Si",
+                "3.- ¿Estas informado sobre los avances tecnológicos actuales en áreas de la carrera?",
                 "No",
-                "Me interesan pero no estoy muy informado"
+                "Me interesan pero no estoy muy informado",
+                "Si"
         ));
         AL_Preguntas.add(new Pregunta(
                 "4.- ¿Cuantas materias reprobaste el último año de preparatoria?",
-                "Ninguna",
+                "3 o mas",
                 "1-2",
-                "3 o más"
+                "Ninguna"
+        ));
+         AL_Preguntas.add(new Pregunta(
+                "5.- ¿Has recibido orientación vocacional para elegir una carrera? ",
+                "No",
+                "Si"
+        ));
+         AL_Preguntas.add(new Pregunta(
+                "6.- ¿Con qué frecuencia entregas a tiempo las tareas de tus materias?",
+                "Pocas veces",
+                "Regularmente",
+                "Siempre"
         ));
         AL_Preguntas.add(new Pregunta(
                 "7.- ¿Aplicas alguna técnica para estudiar? (Por ejemplo: subrayar, hacer mapas mentales, etc )",
-                "Si",
-                "No"
+                "No",
+                "Si"
         ));
         AL_Preguntas.add(new Pregunta(
                 "8.- En tu día prefieres:",
-                "Tener la mayoría de cosas planeadas",
-                "Ser espontáneo",
-                "Tener algunas cosas planeadas y ser algo espontáneo"
+                "Ser esspontaneo",
+                "Tener algunas cosas planeadas y ser algo espontáneo",
+                "Tener la mayoria de cosas planeadas"
         ));
         AL_Preguntas.add(new Pregunta(
                 "9.- ¿Puedes escuchar a alguien durante un largo periodo, sin interrumpirle y entender los puntos claves de los que está hablando?",
-                "Si",
-                "No"
+                "No",
+                "Si"
         ));
         AL_Preguntas.add(new Pregunta(
                 "10.- ¿Te gusta armar rompecabezas geométricos (cubo de Ruby por ejemplo)?",
-                "Si",
-                "No"                
-        ));
-        AL_Preguntas.add(new Pregunta(
-                "11.- ¿Puedes darte cuenta rápido de cuál es el error de un compañero que no puede resolver un problema de matemáticas?",
-                "Tener la mayoría de cosas planeadas",
-                "Ser espontáneo",
-                "Tener algunas cosas planeadas y ser algo espontáneo"
+                "No",
+                "Si"                
         ));
          AL_Preguntas.add(new Pregunta(
-                "12.- ¿Te gusta conocer programas computacionales para hacer cálculos y operaciones matemáticas?",
-                "Me gusta",
+                "11.- ¿Te gusta conocer programas computacionales para hacer cálculos y operaciones matemáticas?",
+                "Me desagrada",
                 "Me es indiferente",
-                "Me desagrada"
+                "Me gusta"
         ));
           AL_Preguntas.add(new Pregunta(
-                "13.- ¿Te gustaría aprender como un ingeniero aplica las matemáticas en su trabajo?",
-                "Me gustaria",
+                "12.- ¿Te gustaría aprender como un ingeniero aplica las matemáticas en su trabajo?",
+                "No me interesa",
                 "Me llama algo la atencion",
-                "No me intereza"
+                "Me interesa"
         ));
            AL_Preguntas.add(new Pregunta(
                 "13.- ¿Te interesaría observar como el centro de computación de una empresa organiza los datos referentes a nóminas prestaciones a los empleados?",
-                "Me gustaria",
-                "Me llama algo la atencion",
-                "No me intereza"
+                "Me es indiferente",
+                "Me gustaria"
         ));
         AL_Preguntas.add(new Pregunta(
                 "14.- Cuando alguien critica tu trabajo generalmente tu:",
@@ -159,25 +171,22 @@ public class Coneccion extends JFrame {
                 "No le das mucha importancia",
                 "Analizas la critica y tratas de mejorar"
         ));
-        AL_Preguntas.add(new Pregunta(
+       AL_Preguntas.add(new Pregunta(
                 "15.- ¿Que tan responsable te consideras?",
                 "Nada",
-                "Poco",
                 "Algo",
-                "Bastante",
                 "Mucho"
         ));
          AL_Preguntas.add(new Pregunta(
                 "16.-¿Cuantas horas estudias por tu cuenta a la semana?",
-                "0",
-                "1-4",
-                "4-7",
-                "4-7"
+                "0-2",
+                "3-6",
+                "7+"
         ));
          AL_Preguntas.add(new Pregunta(
                 "17.-¿Te consideras alguien autodidacta?",
-                "Si",
-                "No"
+                "No",
+                "Si"
         ));
          AL_Preguntas.add(new Pregunta(
                 "18.-¿Que tanto conoces la carga académica de la carrera?",
