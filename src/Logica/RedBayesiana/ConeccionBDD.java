@@ -20,17 +20,18 @@ import java.util.logging.Logger;
  * @author EdgarMoncloa
  */
 public class ConeccionBDD {
+
     //src/Datos/
     String url = "BDD.db";
+    String urlRelativa = "src//Datos//BDD.db";
     Connection connect;
 
     public ConeccionBDD() throws ClassNotFoundException {
 
         try {
-            //connect = DriverManager.getConnection("jdbc:sqlite:" + url);
-            Class.forName("org.sqlite.JDBC");
-            //connect = DriverManager.getConnection("jdbc:sqlite:resource:" + DirectorioActual() + "BDD.db");
-            connect = DriverManager.getConnection("jdbc:sqlite::resource:" + url);
+            connect = DriverManager.getConnection("jdbc:sqlite:" + urlRelativa);
+            //Class.forName("org.sqlite.JDBC");            
+            //connect = DriverManager.getConnection("jdbc:sqlite::resource:" + url);
             if (connect != null) {
                 System.out.println("Conectado");
             } else {
@@ -78,11 +79,12 @@ public class ConeccionBDD {
                 + " and F=" + AL_Respuestas.get(5)
                 + " and G=" + AL_Respuestas.get(6)
                 + " and H=" + AL_Respuestas.get(7)
-                + " and I=" + AL_Respuestas.get(8) //" and J="+AL_Respuestas.get(9)+
-                //" and K="+AL_Respuestas.get(10)+
-                // " and L="+AL_Respuestas.get(11)+
-                // " and M="+AL_Respuestas.get(12)+
-                //" and N="+AL_Respuestas.get(13)                                            
+                + " and I=" + AL_Respuestas.get(8)
+                + " and J=" + AL_Respuestas.get(9)
+               // + " and K=" + AL_Respuestas.get(10)
+               // + " and L=" + AL_Respuestas.get(11)
+               // + " and M=" + AL_Respuestas.get(12)
+               // + " and N=" + AL_Respuestas.get(13)
                 ;
         PreparedStatement st = connect.prepareStatement("SELECT COUNT(*) AS prob FROM BDD_Evidencias WHERE " + Str_sql + " and Q=1");
         ProbSi = st.executeQuery();
@@ -90,6 +92,8 @@ public class ConeccionBDD {
         ProbTot = st2.executeQuery();
         int_ProbSi = ProbSi.getInt("prob");
         int_ProbTot = ProbTot.getInt("prob");
+        System.out.println("PROB SI "+ int_ProbSi);
+        System.out.println("PROB TOT "+ int_ProbTot);
         if (int_ProbTot == 0) {
             return (float) 0.0;
         } else {

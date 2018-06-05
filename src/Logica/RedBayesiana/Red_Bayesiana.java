@@ -44,219 +44,206 @@ public class Red_Bayesiana {
         AL_RedBayesiana.add(new Nodo((float) 0.3, (float) 0.4, (float) 0.3));
         AL_RedBayesiana.add(new Nodo((float) 0.2, (float) 0.45, (float) 0.35));
         AL_RedBayesiana.add(new Nodo((float) 0.25, (float) 0.50, (float) 0.25));//13 respuestas sin padres
-        
 
         //Nodos Categorias
-        ArrayList Actitud = new ArrayList();
-        ArrayList Responsabilidad = new ArrayList();
-        ArrayList TiempoDedicado = new ArrayList();
-        ArrayList ConocimientoCarrera = new ArrayList();
-        ArrayList Autodidacta = new ArrayList();
-        ArrayList ProbTerminar=new ArrayList();
-        for (int j = 0; j <= 350; j++) {
-            Actitud.add(null);
-            Responsabilidad.add(null);
-            TiempoDedicado.add(null);
-            ConocimientoCarrera.add(null);
-            Autodidacta.add(null);
-            ProbTerminar.add(null);
-        }
         //-----
-        Actitud.add(111, (float) .5);
-        Actitud.add(112, (float) .3);
-        Actitud.add(113, (float) .6);
+        float[][][] Flo_Actitud = new float[3][2][3];
+        Flo_Actitud[0][0][0] = (float) .5;
+        Flo_Actitud[0][0][1] = (float) .3;
+        Flo_Actitud[0][0][2] = (float) .6;
 
-        Actitud.add(121, (float) .7);
-        Actitud.add(122, (float) .5);
-        Actitud.add(123, (float) .9);
+        Flo_Actitud[0][1][0] = (float) .7;
+        Flo_Actitud[0][1][1] = (float) .5;
+        Flo_Actitud[0][1][2] = (float) .9;
 
-        Actitud.add(211, (float) .4);
-        Actitud.add(212, (float) .2);
-        Actitud.add(213, (float) .5);
+        Flo_Actitud[1][0][0] = (float) .4;
+        Flo_Actitud[1][0][1] = (float) .2;
+        Flo_Actitud[1][0][2] = (float) .5;
 
-        Actitud.add(221, (float) .6);
-        Actitud.add(222, (float) .4);
-        Actitud.add(223, (float) .7);
+        Flo_Actitud[1][1][0] = (float) .6;
+        Flo_Actitud[1][1][1] = (float) .4;
+        Flo_Actitud[1][1][2] = (float) .7;
 
-        Actitud.add(311, (float) .4);
-        Actitud.add(312, (float) .3);
-        Actitud.add(313, (float) .4);
+        Flo_Actitud[2][0][0] = (float) .4;
+        Flo_Actitud[2][0][1] = (float) .3;
+        Flo_Actitud[2][0][2] = (float) .4;
 
-        Actitud.add(321, (float) .5);
-        Actitud.add(322, (float) .3);
-        Actitud.add(323, (float) .7);
-        
-        ArrayList AL_ActitudPadres=new ArrayList();
+        Flo_Actitud[2][1][0] = (float) .5;
+        Flo_Actitud[2][1][1] = (float) .3;
+        Flo_Actitud[2][1][2] = (float) .7;
+
+        ArrayList AL_ActitudPadres = new ArrayList();
         AL_ActitudPadres.add(3);
         AL_ActitudPadres.add(8);
         AL_ActitudPadres.add(13);
-        AL_RedBayesiana.add(new Nodo(Actitud,AL_ActitudPadres));
+        AL_RedBayesiana.add(new Nodo(Flo_Actitud, AL_ActitudPadres));
         //----------
+        float[][][] FLo_Responsabilidad = new float[2][3][3];
+        FLo_Responsabilidad[0][0][0] = (float) .5;
+        FLo_Responsabilidad[0][0][1] = (float) .55;
+        FLo_Responsabilidad[0][0][2] = (float) .6;
 
-        
-        Responsabilidad.add(111, (float) .5);
-        Responsabilidad.add(112, (float) .55);
-        Responsabilidad.add(113, (float) .6);
+        FLo_Responsabilidad[0][1][0] = (float) .4;
+        FLo_Responsabilidad[0][1][1] = (float) .45;
+        FLo_Responsabilidad[0][1][2] = (float) .5;
 
-        Responsabilidad.add(121, (float) .4);
-        Responsabilidad.add(122, (float) .45);
-        Responsabilidad.add(123, (float) .5);
+        FLo_Responsabilidad[0][2][0] = (float) .2;
+        FLo_Responsabilidad[0][2][1] = (float) .25;
+        FLo_Responsabilidad[0][2][2] = (float) .3;
 
-        Responsabilidad.add(131, (float) .2);
-        Responsabilidad.add(132, (float) .25);
-        Responsabilidad.add(133, (float) .3);
+        FLo_Responsabilidad[1][0][0] = (float) .7;
+        FLo_Responsabilidad[1][0][1] = (float) .75;
+        FLo_Responsabilidad[1][0][2] = (float) .8;
 
-        Responsabilidad.add(211, (float) .7);
-        Responsabilidad.add(212, (float) .75);
-        Responsabilidad.add(213, (float) .8);
+        FLo_Responsabilidad[1][1][0] = (float) .5;
+        FLo_Responsabilidad[1][1][1] = (float) .55;
+        FLo_Responsabilidad[1][1][2] = (float) .6;
 
-        Responsabilidad.add(221, (float) .5);
-        Responsabilidad.add(222, (float) .55);
-        Responsabilidad.add(223, (float) .6);
-
-        Responsabilidad.add(231, (float) .4);
-        Responsabilidad.add(232, (float) .45);
-        Responsabilidad.add(233, (float) .5);
-        ArrayList AL_ResPadres=new ArrayList();
+        FLo_Responsabilidad[1][2][0] = (float) .4;
+        FLo_Responsabilidad[1][2][1] = (float) .45;
+        FLo_Responsabilidad[1][2][2] = (float) .5;
+        ArrayList AL_ResPadres = new ArrayList();
         AL_ResPadres.add(1);
         AL_ResPadres.add(3);
-        AL_ResPadres.add(5);        
-        AL_RedBayesiana.add(new Nodo(Responsabilidad,AL_ResPadres));
+        AL_ResPadres.add(5);
+        AL_RedBayesiana.add(new Nodo(FLo_Responsabilidad, AL_ResPadres));
         //-------------
+        float[][][] Flo_TiempoDedicado = new float[3][3][3];
+        Flo_TiempoDedicado[0][0][0] = (float) .2;
+        Flo_TiempoDedicado[0][0][1] = (float) .3;
+        Flo_TiempoDedicado[0][0][2] = (float) .4;
 
-        TiempoDedicado.add(111, (float) .2);
-        TiempoDedicado.add(111, (float) .3);
-        TiempoDedicado.add(111, (float) .4);
+        Flo_TiempoDedicado[0][1][0] = (float) .3;
+        Flo_TiempoDedicado[0][1][1] = (float) .4;
+        Flo_TiempoDedicado[0][1][2] = (float) .5;
 
-        TiempoDedicado.add(121, (float) .3);
-        TiempoDedicado.add(121, (float) .4);
-        TiempoDedicado.add(121, (float) .5);
+        Flo_TiempoDedicado[0][2][0] = (float) .4;
+        Flo_TiempoDedicado[0][2][1] = (float) .5;
+        Flo_TiempoDedicado[0][2][2] = (float) .6;
 
-        TiempoDedicado.add(131, (float) .4);
-        TiempoDedicado.add(131, (float) .5);
-        TiempoDedicado.add(131, (float) .6);
+        Flo_TiempoDedicado[1][0][0] = (float) .25;
+        Flo_TiempoDedicado[1][0][1] = (float) .35;
+        Flo_TiempoDedicado[1][0][2] = (float) .45;
 
-        TiempoDedicado.add(211, (float) .25);
-        TiempoDedicado.add(211, (float) .35);
-        TiempoDedicado.add(211, (float) .45);
+        Flo_TiempoDedicado[1][1][0] = (float) .35;
+        Flo_TiempoDedicado[1][1][1] = (float) .45;
+        Flo_TiempoDedicado[1][1][2] = (float) .55;
 
-        TiempoDedicado.add(221, (float) .35);
-        TiempoDedicado.add(221, (float) .45);
-        TiempoDedicado.add(221, (float) .55);
+        Flo_TiempoDedicado[1][2][0] = (float) .45;
+        Flo_TiempoDedicado[1][2][1] = (float) .55;
+        Flo_TiempoDedicado[1][2][2] = (float) .65;
 
-        TiempoDedicado.add(231, (float) .45);
-        TiempoDedicado.add(231, (float) .55);
-        TiempoDedicado.add(231, (float) .65);
+        Flo_TiempoDedicado[2][0][0] = (float) .3;
+        Flo_TiempoDedicado[2][0][1] = (float) .4;
+        Flo_TiempoDedicado[2][0][2] = (float) .5;
 
-        TiempoDedicado.add(311, (float) .3);
-        TiempoDedicado.add(311, (float) .4);
-        TiempoDedicado.add(311, (float) .5);
+        Flo_TiempoDedicado[2][1][0] = (float) .4;
+        Flo_TiempoDedicado[2][1][1] = (float) .5;
+        Flo_TiempoDedicado[2][1][2] = (float) .6;
 
-        TiempoDedicado.add(321, (float) .4);
-        TiempoDedicado.add(321, (float) .5);
-        TiempoDedicado.add(321, (float) .6);
-
-        TiempoDedicado.add(331, (float) .5);
-        TiempoDedicado.add(331, (float) .6);
-        TiempoDedicado.add(331, (float) .7);
-        ArrayList AL_TiempoPadres=new ArrayList();
+        Flo_TiempoDedicado[2][2][0] = (float) .5;
+        Flo_TiempoDedicado[2][2][1] = (float) .6;
+        Flo_TiempoDedicado[2][2][2] = (float) .7;
+        ArrayList AL_TiempoPadres = new ArrayList();
         AL_TiempoPadres.add(0);
         AL_TiempoPadres.add(5);
         AL_TiempoPadres.add(7);
-        AL_RedBayesiana.add(new Nodo(TiempoDedicado,AL_TiempoPadres));
+        AL_RedBayesiana.add(new Nodo(Flo_TiempoDedicado, AL_TiempoPadres));
 
         //----
-        ConocimientoCarrera.add(111, (float) .3);
-        ConocimientoCarrera.add(112, (float) .5);
+        float[][][] Flo_ConocimientoCarrera = new float[2][3][2];
+        Flo_ConocimientoCarrera[0][0][0]= (float) .3;
+        Flo_ConocimientoCarrera[0][0][1]= (float) .5;
 
-        ConocimientoCarrera.add(121, (float) .4);
-        ConocimientoCarrera.add(122, (float) .6);
+        Flo_ConocimientoCarrera[0][1][0]= (float) .4;
+        Flo_ConocimientoCarrera[0][1][1]= (float) .6;
 
-        ConocimientoCarrera.add(131, (float) .6);
-        ConocimientoCarrera.add(132, (float) .8);
+        Flo_ConocimientoCarrera[0][2][0]= (float) .6;
+        Flo_ConocimientoCarrera[0][2][1]= (float) .8;
 
-        ConocimientoCarrera.add(211, (float) .4);
-        ConocimientoCarrera.add(212, (float) .6);
+        Flo_ConocimientoCarrera[1][0][0]= (float) .4;
+        Flo_ConocimientoCarrera[1][0][1]= (float) .6;
 
-        ConocimientoCarrera.add(221, (float) .5);
-        ConocimientoCarrera.add(222, (float) .7);
+        Flo_ConocimientoCarrera[1][1][0]= (float) .5;
+        Flo_ConocimientoCarrera[1][1][1]= (float) .7;
 
-        ConocimientoCarrera.add(231, (float) .7);
-        ConocimientoCarrera.add(232, (float) .9);
-        ArrayList AL_ConocimientoPadres=new ArrayList();
+        Flo_ConocimientoCarrera[1][2][0]= (float) .7;
+        Flo_ConocimientoCarrera[1][2][1]= (float) .9;
+        ArrayList AL_ConocimientoPadres = new ArrayList();
         AL_ConocimientoPadres.add(1);
         AL_ConocimientoPadres.add(2);
         AL_ConocimientoPadres.add(4);
-        AL_RedBayesiana.add(new Nodo(ConocimientoCarrera,AL_ConocimientoPadres));
+        AL_RedBayesiana.add(new Nodo(Flo_ConocimientoCarrera, AL_ConocimientoPadres));
 
         //-- ------
-        Autodidacta.add(111, (float) .3);
-        Autodidacta.add(112, (float) .4);
+         float[][][] Flo_Autodidacta = new float[2][3][2];
+        Flo_Autodidacta[0][0][0]= (float) .3;
+        Flo_Autodidacta[0][0][1]= (float) .4;
 
-        Autodidacta.add(121, (float) .4);
-        Autodidacta.add(122, (float) .5);
+        Flo_Autodidacta[0][1][0]= (float) .4;
+        Flo_Autodidacta[0][1][1]= (float) .5;
 
-        Autodidacta.add(131, (float) .45);
-        Autodidacta.add(132, (float) .55);
+        Flo_Autodidacta[0][2][0]= (float) .45;
+        Flo_Autodidacta[0][2][1]= (float) .55;
 
-        Autodidacta.add(211, (float) .45);
-        Autodidacta.add(212, (float) .55);
+        Flo_Autodidacta[1][0][0]= (float) .45;
+        Flo_Autodidacta[1][0][1]= (float) .55;
 
-        Autodidacta.add(221, (float) .55);
-        Autodidacta.add(222, (float) .65);
+        Flo_Autodidacta[1][1][0]= (float) .55;
+        Flo_Autodidacta[1][1][1]= (float) .65;
 
-        Autodidacta.add(231, (float) .6);
-        Autodidacta.add(232, (float) .7);
-        ArrayList AL_Autodidacta=new ArrayList();
+        Flo_Autodidacta[1][2][0]= (float) .6;
+        Flo_Autodidacta[1][2][1]= (float) .7;
+        ArrayList AL_Autodidacta = new ArrayList();
         AL_Autodidacta.add(6);
         AL_Autodidacta.add(7);
         AL_Autodidacta.add(9);
-        AL_RedBayesiana.add(new Nodo(Autodidacta,AL_Autodidacta));
-        
-        ProbTerminar.add(1,(float).6);
-        ProbTerminar.add(2,(float).6);
-        ProbTerminar.add(3,(float).6);
-        ProbTerminar.add(4,(float).6);
-        ProbTerminar.add(5,(float).6);
-        ProbTerminar.add(6,(float).6);
-        ProbTerminar.add(7,(float).6);
-        ProbTerminar.add(8,(float).6);
-        ProbTerminar.add(9,(float).6);
-        ProbTerminar.add(10,(float).6);
-        ProbTerminar.add(11,(float).6);
-        ProbTerminar.add(12,(float).6);
-        ProbTerminar.add(13,(float).6);
-        ProbTerminar.add(14,(float).6);
-        ProbTerminar.add(15,(float).6);
-        ProbTerminar.add(16,(float).6);
-        ProbTerminar.add(17,(float).6);
-        ProbTerminar.add(18,(float).6);
-        ProbTerminar.add(19,(float).6);
-        ProbTerminar.add(20,(float).6);
-        ProbTerminar.add(21,(float).6);
-        ProbTerminar.add(22,(float).6);
-        ProbTerminar.add(23,(float).6);
-        ProbTerminar.add(24,(float).6);
-        ProbTerminar.add(25,(float).6);
-        ProbTerminar.add(26,(float).6);
-        ProbTerminar.add(27,(float).6);
-        ProbTerminar.add(28,(float).6);
-        ProbTerminar.add(29,(float).6);
-        ProbTerminar.add(30,(float).6);
-        ProbTerminar.add(31,(float).6);
-        ProbTerminar.add(32,(float).6);
-        ArrayList AL_ProbTerminarPadres=new ArrayList();
+        AL_RedBayesiana.add(new Nodo(Flo_Autodidacta, AL_Autodidacta));
+        float[] Flo_Prob=new float[32];
+        Flo_Prob[0]= (float) .2;
+        Flo_Prob[1]= (float) .22;
+        Flo_Prob[2]= (float) .24;
+        Flo_Prob[3]= (float) .26;
+        Flo_Prob[4]= (float) .28;
+        Flo_Prob[5]= (float) .30;
+        Flo_Prob[6]= (float) .32;
+        Flo_Prob[7]= (float) .34;
+        Flo_Prob[8]= (float) .36;
+        Flo_Prob[9]= (float) .38;
+        Flo_Prob[10]= (float) .40;
+        Flo_Prob[11]= (float) .42;
+        Flo_Prob[12]= (float) .44;
+        Flo_Prob[13]= (float) .46;
+        Flo_Prob[14]= (float) .48;
+        Flo_Prob[15]= (float) .50;
+        Flo_Prob[16]= (float) .52;
+        Flo_Prob[17]= (float) .54;
+        Flo_Prob[18]= (float) .56;
+        Flo_Prob[19]= (float) .58;
+        Flo_Prob[20]= (float) .60;
+        Flo_Prob[21]= (float) .62;
+        Flo_Prob[22]= (float) .64;
+        Flo_Prob[23]= (float) .66;
+        Flo_Prob[24]= (float) .68;
+        Flo_Prob[25]= (float) .70;
+        Flo_Prob[26]= (float) .72;
+        Flo_Prob[27]= (float) .74;
+        Flo_Prob[28]= (float) .76;
+        Flo_Prob[29]= (float) .78;
+        Flo_Prob[30]= (float) .80;
+        Flo_Prob[31]= (float) .82;
+        ArrayList AL_ProbTerminarPadres = new ArrayList();
         AL_ProbTerminarPadres.add(14);
         AL_ProbTerminarPadres.add(15);
         AL_ProbTerminarPadres.add(16);
         AL_ProbTerminarPadres.add(17);
         AL_ProbTerminarPadres.add(18);
-        AL_RedBayesiana.add(new Nodo(ProbTerminar,AL_ProbTerminarPadres,true));
-        
+        AL_RedBayesiana.add(new Nodo(Flo_Prob, AL_ProbTerminarPadres));
+
     }
 
-    public void calcularCategorias() {        
-        for (int j = 0; j < AL_Respuestas.size(); j++) {            
+    public void calcularCategorias() {
+        for (int j = 0; j < AL_Respuestas.size(); j++) {
 
             //calcula valor de las categorias
             if (j == 3 || j == 4 || j == 8 || j == 13) {
@@ -285,40 +272,45 @@ public class Red_Bayesiana {
             if (Categorias[j] <= 5) {
                 Categorias[j] = 5;
             }
-        }        
+        }
     }
-    public float calcularProbabilidad(){
+
+    public float calcularProbabilidad() {
         double total = 0, probabilidad = 0;
         for (int j = 0; j < AL_Respuestas.size(); j++) {
             // Calcula Probabilidad
             probabilidad += (int) AL_Respuestas.get(j);
             total += (int) AL_nRespuestas.get(j) - 1;
-        }        
+        }
         //Normaliza valor probabilidades
         return (float) ((.60 * (probabilidad / total) / 1) + .15);
     }
-    public double calcularMuestreoPorPriori() throws SQLException, ClassNotFoundException{
-        ConeccionBDD con=new ConeccionBDD();   
-        float Flo_probabilidad=con.calcularProbabilidad(AL_Respuestas);
+
+    public double calcularMuestreoPorPriori() throws SQLException, ClassNotFoundException {
+        ConeccionBDD con = new ConeccionBDD();
+        float Flo_probabilidad = con.calcularProbabilidad(AL_Respuestas);
         con.close();
-        if(Flo_probabilidad==0.0){
-            Flo_probabilidad=calcularProbabilidad();
+        System.out.println("entra");
+        if (Flo_probabilidad == 0.0) {
+            System.out.println("no hay");
+            Flo_probabilidad = calcularProbabilidad();
         }
-        if(Flo_probabilidad>=.70){
-            Flo_probabilidad=(float) .75;
-        }
-        return  Flo_probabilidad;        
+        /*if (Flo_probabilidad >= .70) {
+            Flo_probabilidad = (float) .75;
+        }*/
+        return Flo_probabilidad;
     }
+
     public void GenerarDatos() throws SQLException, ClassNotFoundException {
         ConeccionBDD con = new ConeccionBDD();
-        int val=0;
+        int val = 0;
         for (int j = 0; j < 1000000; j++) {
-            if(j==val){
-                 System.out.println(j);
-                 val+=1000;
-                }
-            for (int k = 0; k < AL_RedBayesiana.size(); k++) {                
-                new generaDatos((Nodo) AL_RedBayesiana.get(k),AL_RedBayesiana);
+            if (j == val) {
+                System.out.println(j);
+                val += 1000;
+            }
+            for (int k = 0; k < AL_RedBayesiana.size(); k++) {
+                new generaDatos((Nodo) AL_RedBayesiana.get(k), AL_RedBayesiana);
             }
             con.ingresarRespuestas(AL_RedBayesiana);
         }

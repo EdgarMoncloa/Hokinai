@@ -5,6 +5,7 @@
  */
 package Logica.RedBayesiana;
 
+import static java.lang.Math.pow;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,6 @@ public class generaDatos {
         if (Pregunta.AL_Padres.isEmpty()) {
             nodoSinPadres();
         } else {
-
             if (Pregunta.nodoFinal) {
                 nodoFinal(redBayesiana);
             } else {
@@ -35,62 +35,56 @@ public class generaDatos {
 
     private void nodoSinPadres() {
         switch (NodoActual.numRespuestas) {
-            case 1:
-                if (aleatorio <= (float) NodoActual.AL_TablaProbabilidades.get(0)) {
-                    NodoActual.setRespuesta(1);
+            case 2:
+                if (aleatorio <= (float) NodoActual.getFlo_TablaProbabilidades(0, 0, 0)) {
+                    NodoActual.setRespuesta(0);
                 } else {
-                    NodoActual.setRespuesta(2);
+                    NodoActual.setRespuesta(1);
                 }
                 break;
-            case 2:
-                if (aleatorio <= (float) NodoActual.AL_TablaProbabilidades.get(0)) {
-                    NodoActual.setRespuesta(1);
-                }
-                if (aleatorio >= (float) NodoActual.AL_TablaProbabilidades.get(0) && aleatorio <= (float) NodoActual.AL_TablaProbabilidades.get(2)) {
-                    NodoActual.setRespuesta(2);
-                }
-                if (aleatorio >= (float) NodoActual.AL_TablaProbabilidades.get(2)) {
-                    NodoActual.setRespuesta(3);
+            case 3:
+                if (aleatorio < (float) NodoActual.getFlo_TablaProbabilidades(0, 0, 0)) {
+                    NodoActual.setRespuesta(0);
+                } else {
+                    if (aleatorio > 1 - (float) NodoActual.getFlo_TablaProbabilidades(0, 0, 2)) {
+                        NodoActual.setRespuesta(2);
+                    } else {
+                        NodoActual.setRespuesta(1);
+                    }
                 }
             default:
                 break;
         }
+
     }
 
-    private void nodoConPadres(ArrayList redBayesiana) {        
-        int udc = 0, codigo = 0;
-        double probabilidad = 0;
-        if (NodoActual.AL_Padres.size() == 3) {
-            udc = 100;
-        } else {
-            udc = 10;
+    private void nodoConPadres(ArrayList redBayesiana) {
+        int[] Int_RespPadres = new int[3];
+        float probabilidad = 0;
+        for (int j = 0; j <= NodoActual.AL_Padres.size() - 1; j++) {
+            Int_RespPadres[j] = ((Nodo) redBayesiana.get((int) NodoActual.AL_Padres.get(j))).Respuesta;
         }
-        for (int j = 1; j <= NodoActual.AL_Padres.size(); j++) {
-            codigo += ((Nodo) redBayesiana.get((int) NodoActual.AL_Padres.get(j - 1))).Respuesta * udc;
-            udc /= 10;
-        }       
-        probabilidad = (float) NodoActual.AL_TablaProbabilidades.get(codigo);
+        probabilidad = (float) NodoActual.getFlo_TablaProbabilidades(Int_RespPadres[0], Int_RespPadres[1], Int_RespPadres[2]);
         if (aleatorio <= probabilidad) {
-            NodoActual.setRespuesta(1);
+            NodoActual.setRespuesta(0);
         } else {
-            NodoActual.setRespuesta(2);
-        }       
+            NodoActual.setRespuesta(1);
+        }
     }
+
     private void nodoFinal(ArrayList redBayesiana) {
-        int codigo = 0;
+        int Int_RespPadres = 0;
         double probabilidad = 0;
-        for (int j = 1; j <= 16; j++) {
-            if (j == 1) {
-                codigo = +((Nodo) NodoActual.AL_Padres.get(j)).Respuesta;
-            } else {
-                codigo = +(j * ((Nodo) NodoActual.AL_Padres.get(j)).Respuesta);
+        for (int j = 0; j <= NodoActual.AL_Padres.size() - 1; j++) {
+            if (NodoActual.getFlo_TablaProbabilidades(0, 0, j) == 1) {
+                Int_RespPadres += pow(2, j);
             }
         }
-        probabilidad = (double) NodoActual.AL_TablaProbabilidades.get(codigo);
+        probabilidad = (double) NodoActual.getFlo_TablaProbabilidades(0, 0, Int_RespPadres);
         if (aleatorio <= probabilidad) {
-            NodoActual.setRespuesta(1);
+            NodoActual.setRespuesta(0);
         } else {
-            NodoActual.setRespuesta(2);
+            NodoActual.setRespuesta(1);
         }
     }
 

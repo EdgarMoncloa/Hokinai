@@ -66,7 +66,7 @@ public class Coneccion extends JFrame {
         Red_Bayesiana red=new Red_Bayesiana(AL_RespuestasUsuario,this.getNumPreguntas());
         Dec_ProbExito = red.calcularMuestreoPorPriori();
         //Esta funcion se utiliza para generar los datos aleatorios
-        //red.GenerarDatos(); 
+       // red.GenerarDatos(); 
         red.calcularCategorias();
         dob_Categorias=red.Categorias;
         JP_Principal.removeAll();
